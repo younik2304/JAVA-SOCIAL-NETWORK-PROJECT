@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="709.0" stylesheets="@../../../STYLE/home_style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox fx:id="navbar" alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMAGES/homefeed.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMAGES/chat.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMAGES/user-xxl.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMAGES/search.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <AnchorPane fx:id="footer" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: -fx-background-color :#373130;;" styleClass="footer" stylesheets="@../../../STYLE/home_style.css" BorderPane.alignment="CENTER" />
+   </bottom>
+   <right>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <AnchorPane fx:id="homefeed" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../STYLE/home_style.css" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

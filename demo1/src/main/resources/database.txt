@@ -1,0 +1,11 @@
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    phonenumber VARCHAR(20) not null,
+    address VARCHAR(255) not null,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    gender VARCHAR(10) not null ,
+    profilepicture longBLOB
+);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.signup_Controller">
+    <ImageView fitHeight="530.0" fitWidth="726.0">
+        <Image url="@../../../IMAGES/background1.jpg" />
+    </ImageView>
+      <AnchorPane prefHeight="529.0" prefWidth="700.0" stylesheets="@../../../STYLE/login_style.css">
+            <Label fx:id="signUpLabel" layoutX="59.0" layoutY="24.0" prefHeight="31.0" prefWidth="203.0" stylesheets="@../../../STYLE/signup_style.css" text="Sign Up for an Account" textFill="#fcfcfc">
+               <font>
+                  <Font name="Tahoma" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="FirstName" layoutX="36.0" layoutY="65.0" prefHeight="30.0" prefWidth="250.0" promptText="First  name" styleClass="textfield" stylesheets="@../../../STYLE/signup_style.css" />
+            <TextField fx:id="LastName" layoutX="36.0" layoutY="110.0" prefHeight="30.0" prefWidth="250.0" promptText="Last name" styleClass="textfield" stylesheets="@../../../STYLE/signup_style.css" />
+            <TextField fx:id="phoneNumberField" layoutX="36.0" layoutY="150.0" prefHeight="30.0" prefWidth="250.0" promptText="Phone Number" styleClass="textfield">
+         <stylesheets>
+            <URL value="@../../../STYLE/signup_style.css" />
+            <URL value="@../../../STYLE/signup_style.css" />
+         </stylesheets></TextField>
+            <TextField fx:id="addressField" layoutX="36.0" layoutY="194.0" prefHeight="30.0" prefWidth="250.0" promptText="Address" styleClass="textfield" stylesheets="@../../../STYLE/signup_style.css" />
+            <TextField fx:id="emailField" layoutX="36.0" layoutY="240.0" prefHeight="30.0" prefWidth="250.0" promptText="Email" styleClass="textfield" stylesheets="@../../../STYLE/signup_style.css" />
+   
+            <PasswordField fx:id="passwordField" layoutX="36.0" layoutY="284.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" styleClass="textfield" stylesheets="@../../../STYLE/signup_style.css" />
+            <ComboBox fx:id="genderComboBox" layoutX="36.0" layoutY="329.0" prefHeight="30.0" prefWidth="250.0" promptText="Gender" styleClass="textfield" stylesheets="@../../../STYLE/signup_style.css" />
+   
+            <Button fx:id="signUpButton" layoutX="238.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleSignUpButton" prefHeight="41.0" prefWidth="250.0" styleClass="btn" stylesheets="@../../../STYLE/signup_style.css" text="Sign Up">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+      <Button layoutX="381.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleProfilePictureButton" text="Add a profile image " />
+      <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" layoutX="381.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" />
+
+      </AnchorPane>
+</StackPane>

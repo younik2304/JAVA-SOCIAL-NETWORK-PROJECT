@@ -1,0 +1,45 @@
+
+.white-form {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.textfield {
+    -fx-background-color: white;
+    -fx-pref-width: 250;
+    -fx-font-size: 14;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.label {
+
+    -fx-color: white;
+    -fx-font-size: 14;
+}
+
+.btn {
+    -fx-background-color: #98583a3a;
+    -fx-text-fill: black;
+    -fx-font-size: 16;
+    -fx-padding: 10 20;
+    -fx-border-color: #5074bc;
+    -fx-border-radius: 5;
+}
+
+.btn:hover {
+    -fx-background-color: grey;
+}
+
+.comboBox {
+    -fx-pref-width: 186;
+    -fx-font-size: 14;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
