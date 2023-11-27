@@ -1,19 +1,11 @@
 package com.example.demo1;
-import java.io.ByteArrayInputStream;
-import java.io.File;
+
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.paint.Color;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
@@ -65,10 +57,19 @@ public class signup_Controller {
 
         File selectedFile = fileChooser.showOpenDialog(Test.getStage(signUpButton));
         if (selectedFile != null) {
-            Image image = new Image(selectedFile.toURI().toString());
+            // Get the file path without the file: prefix
+            String imagePath = selectedFile.toURI().getPath();
+
+            // Upload the image to Cloudinary using the file path
+            CloudinaryImageUtility.uploadImage(imagePath, emailField.getText() + ".png");
+
+            // Display the image in your UI if needed
+            Image image = new Image("file:" + imagePath);
             profilePic.setImage(image);
         }
     }
+
+
 
     @FXML
     public void handleSignUpButton() {
@@ -81,9 +82,9 @@ public class signup_Controller {
         String addressText = addressField.getText();
 
         if (firstNameText.isEmpty() || lastNameText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty() || genderText == null) {
-            Test.showAlert("A field is empty ","All fields are necessary");
+            Test.showAlert("A field is empty ", "All fields are necessary");
         } else {
-            insertUser(firstNameText, lastNameText, phoneNumberText, addressText,  emailText, passwordText,  genderText);
+            insertUser(firstNameText, lastNameText, phoneNumberText, addressText, emailText, passwordText, genderText);
 
 
             // Use the getStage method to get the current stage
@@ -93,81 +94,53 @@ public class signup_Controller {
             SceneSwitcher.switchScene("login.fxml", currentStage, "login");
         }
     }
+
     public void insertUser(String firstName, String lastName, String phoneNumber, String address, String email, String password, String gender) {
         try {
             DatabaseConnector databaseConnector = new DatabaseConnector();
             Connection connection = databaseConnector.getConnection();
 
-            // SQL query with a prepared statement
-            String sql = "INSERT INTO users (firstname, lastname, phonenumber, address, email, password, gender, profilepicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // Check if a user with the same email already exists
+            String checkIfExistsQuery = "SELECT * FROM users WHERE email=?";
+            try (PreparedStatement checkIfExistsStatement = connection.prepareStatement(checkIfExistsQuery)) {
+                checkIfExistsStatement.setString(1, email);
 
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, phoneNumber);
-            preparedStatement.setString(4, address);
-            preparedStatement.setString(5, email);
-            preparedStatement.setString(6, password);
-            preparedStatement.setString(7, gender);
-
-            // Check if a profile picture is selected
-            if (profilePic.getImage() != null) {
-                // Convert the JavaFX Image to a byte array
-                byte[] imageData = convertImageToByteArray(profilePic.getImage());
-
-                // Create a ByteArrayInputStream from the byte array
-                ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
-
-                // Set the binary image data to the prepared statement
-                preparedStatement.setBlob(8, inputStream);
-            } else {
-                preparedStatement.setNull(8, Types.BLOB);
+                try (ResultSet existingUserResultSet = checkIfExistsStatement.executeQuery()) {
+                    if (existingUserResultSet.next()) {
+                        Test.showAlert("User exists", "There is already a user with the same email " + email + " in the database.");
+                        return;  // Exit if the user already exists
+                    }
+                }
             }
 
-            // Execute the insert statement
-            int rowsInserted = preparedStatement.executeUpdate();
-
-            if (rowsInserted > 0) {
-                // Get the generated keys (if any)
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int userId = generatedKeys.getInt(1);
-                    System.out.println("User ID: " + userId);
-                    // Optionally, you can store or use the generated user ID
+            // No user with the same email, proceed with insertion
+            String insertQuery = "INSERT INTO users (firstname, lastname, phonenumber, address, email, password, gender, profilepicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, phoneNumber);
+                preparedStatement.setString(4, address);
+                preparedStatement.setString(5, email);
+                preparedStatement.setString(6, password);
+                preparedStatement.setString(7, gender);
+                if(profilePic.getImage()!=null){
+                    preparedStatement.setString(8,email+".png");
+                }else {
+                    preparedStatement.setString(8, "default.png");
                 }
 
-                // Close the prepared statement
-                preparedStatement.close();
-                databaseConnector.closeConnection();
+                int rowsInserted = preparedStatement.executeUpdate();
 
-                Test.showAlert("Signup successful", "Now you'll be directed to the login ");
-            } else {
-                // No rows were inserted
-                System.out.println("No rows were inserted.");
+            } catch (SQLException e) {
+                // Handle database exceptions
+                throw new RuntimeException("Database error: " + e.getMessage(), e);
+            } finally {
+                // Close resources in a finally block to ensure they are closed regardless of exceptions
+                databaseConnector.closeConnection();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            // Handle SQL connection exceptions
+            throw new RuntimeException("Error connecting to the database: " + e.getMessage(), e);
         }
-    }
-    private byte[] convertImageToByteArray(Image image) {
-        int width = (int) image.getWidth();
-        int height = (int) image.getHeight();
-
-        PixelReader pixelReader = image.getPixelReader();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(4 * width * height);
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                Color color = pixelReader.getColor(x, y);
-                int argb = (int) ((color).getOpacity() * 255) << 24 |
-                        (int) (color.getRed() * 255) << 16 |
-                        (int) (color.getGreen() * 255) << 8 |
-                        (int) (color.getBlue() * 255);
-                byteBuffer.putInt(argb);
-            }
-        }
-
-        return byteBuffer.array();
     }
 }

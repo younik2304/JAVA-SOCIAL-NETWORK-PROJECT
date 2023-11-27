@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DatabaseConnector {
     //private static final String JDBC_URL = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11664992";
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/java_project";
+    private static final String JDBC_URL = "jdbc:mysql://viaduct.proxy.rlwy.net:33591/railway";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "";
+    private static final String JDBC_PASSWORD = "66-5ceh214d5-aA6D6EabAAg5ggHHAhh";
 
     private Connection connection;
 

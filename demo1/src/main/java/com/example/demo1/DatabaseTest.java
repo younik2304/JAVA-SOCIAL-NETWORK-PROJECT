@@ -17,13 +17,14 @@ public class DatabaseTest {
                 Statement statement = connection.createStatement();
 
                 // Insert values into the 'users' table.
-                String selectQuery = "select * from users ";
+                String selectQuery = "CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, phonenumber VARCHAR(20) NOT NULL, address VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, gender VARCHAR(10) NOT NULL, profilepicture VARCHAR(255));";
+
 
                 // Execute the INSERT query.
-                ResultSet r =statement.executeQuery(selectQuery);
-               while(r.next()) {
-                   System.out.println(r.getString("email"));
-               }
+                statement.executeUpdate(selectQuery.strip());
+               //while(r.next()) {
+                 //  System.out.println(r.getString("email"));
+               //}
                 // Close the statement and connection.
                 statement.close();
 

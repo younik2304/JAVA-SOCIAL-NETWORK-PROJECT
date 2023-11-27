@@ -7,5 +7,5 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     gender VARCHAR(10) not null ,
-    profilepicture longBLOB
+    profilepicture varchar(255),
 );
