@@ -35,12 +35,15 @@ public class signup_Controller {
 
     @FXML
     private ImageView profilePic;
+    private static String imagepath="";
 
     @FXML
     private Button signUpButton;
 
     @FXML
     private Label signUpLabel;
+
+
 
     public void initialize() {
         List<String> genderOptions = Arrays.asList("Male", "Female");
@@ -61,11 +64,11 @@ public class signup_Controller {
             String imagePath = selectedFile.toURI().getPath();
 
             // Upload the image to Cloudinary using the file path
-            CloudinaryImageUtility.uploadImage(imagePath, emailField.getText() + ".png");
-
+            //
             // Display the image in your UI if needed
             Image image = new Image("file:" + imagePath);
             profilePic.setImage(image);
+            imagepath=imagePath;
         }
     }
 
@@ -84,18 +87,31 @@ public class signup_Controller {
         if (firstNameText.isEmpty() || lastNameText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty() || genderText == null) {
             Test.showAlert("A field is empty ", "All fields are necessary");
         } else {
-            insertUser(firstNameText, lastNameText, phoneNumberText, addressText, emailText, passwordText, genderText);
+            int userId = insertUser(firstNameText, lastNameText, phoneNumberText, addressText, emailText, passwordText, genderText);
+
+            if (userId != -1) {
+                CloudinaryImageUtility.uploadImage(imagepath, String.valueOf(userId));
+                updateUserProfilePicture(userId, String.valueOf(userId));
+
+                // Use the getStage method to get the current stage
+                Stage currentStage = Test.getStage(signUpButton);
+
+                // Use the switchScene method to switch to the new scene
+                SceneSwitcher.switchScene("login.fxml", currentStage, "login");
+            } else {
+                // Handle the case where user ID is not valid
+                System.out.println("Failed to get valid user ID");
+            }
+
 
 
             // Use the getStage method to get the current stage
-            Stage currentStage = Test.getStage(signUpButton);
 
-            // Use the switchScene method to switch to the new scene
-            SceneSwitcher.switchScene("login.fxml", currentStage, "login");
         }
     }
 
-    public void insertUser(String firstName, String lastName, String phoneNumber, String address, String email, String password, String gender) {
+    public int insertUser(String firstName, String lastName, String phoneNumber, String address, String email, String password, String gender) {
+        int returnedid = -1;
         try {
             DatabaseConnector databaseConnector = new DatabaseConnector();
             Connection connection = databaseConnector.getConnection();
@@ -108,7 +124,7 @@ public class signup_Controller {
                 try (ResultSet existingUserResultSet = checkIfExistsStatement.executeQuery()) {
                     if (existingUserResultSet.next()) {
                         Test.showAlert("User exists", "There is already a user with the same email " + email + " in the database.");
-                        return;  // Exit if the user already exists
+                        return -1;  // Return -1 to indicate that the user already exists
                     }
                 }
             }
@@ -123,19 +139,32 @@ public class signup_Controller {
                 preparedStatement.setString(5, email);
                 preparedStatement.setString(6, password);
                 preparedStatement.setString(7, gender);
-                if(profilePic.getImage()!=null){
-                    preparedStatement.setString(8,email+".png");
-                }else {
-                    preparedStatement.setString(8, "default.png");
-                }
+                preparedStatement.setString(8, "default.png");
 
                 int rowsInserted = preparedStatement.executeUpdate();
 
+                if (rowsInserted > 0) {
+                    // Get the generated keys (if any)
+                    ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+                    if (generatedKeys.next()) {
+                        // Return the generated user ID
+                        returnedid= generatedKeys.getInt(1);
+                    } else {
+                        // Handle the case where no keys were generated
+                        throw new RuntimeException("No generated keys were obtained.");
+                    }
+                } else {
+                    // Handle the case where no rows were inserted
+                    throw new RuntimeException("No rows were inserted.");
+                }
+                return returnedid;
             } catch (SQLException e) {
                 // Handle database exceptions
                 throw new RuntimeException("Database error: " + e.getMessage(), e);
             } finally {
                 // Close resources in a finally block to ensure they are closed regardless of exceptions
+
                 databaseConnector.closeConnection();
             }
         } catch (SQLException e) {
@@ -143,4 +172,36 @@ public class signup_Controller {
             throw new RuntimeException("Error connecting to the database: " + e.getMessage(), e);
         }
     }
+    public void updateUserProfilePicture(int userId, String newProfilePicture) {
+        try {
+            DatabaseConnector databaseConnector = new DatabaseConnector();
+            Connection connection = databaseConnector.getConnection();
+
+            // Update the user with the new profile picture
+            String updateQuery = "UPDATE users SET profilepicture=? WHERE id=?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+                updateStatement.setString(1, newProfilePicture);
+                updateStatement.setInt(2, userId);
+
+                int rowsUpdated = updateStatement.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    System.out.println("User profile picture updated successfully.");
+                } else {
+                    System.out.println("No rows were updated. User may not exist.");
+                }
+            } catch (SQLException e) {
+                // Handle database exceptions
+                throw new RuntimeException("Database error: " + e.getMessage(), e);
+            } finally {
+                // Close resources in a finally block to ensure they are closed regardless of exceptions
+                databaseConnector.closeConnection();
+            }
+        } catch (Exception e) {
+            // Handle SQL connection exceptions
+            throw new RuntimeException("Error connecting to the database: " + e.getMessage(), e);
+        }
+    }
+
+
 }

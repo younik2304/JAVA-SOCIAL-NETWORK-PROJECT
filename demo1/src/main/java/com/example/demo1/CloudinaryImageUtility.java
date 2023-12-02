@@ -34,10 +34,11 @@ public class CloudinaryImageUtility {
             // Create a Transformation object to set the quality parameter
             Transformation transformation = new Transformation().quality(compressionQuality);
 
-            // Upload the image to Cloudinary with the specified quality setting
+            // Upload the image to Cloudinary with the specified quality setting and format
             Map<String, Object> uploadResult = cloudinary.uploader().upload(localImagePath, ObjectUtils.asMap(
                     "public_id", fileName,
-                    "transformation", transformation
+                    "transformation", transformation,
+                    "format", "png" // Set the format parameter
             ));
 
             // Print the result (optional)
@@ -46,6 +47,7 @@ public class CloudinaryImageUtility {
             e.printStackTrace();
         }
     }
+
     public static void downloadImage(String fileName, String destinationPath) {
         try {
             // Construct the Cloudinary URL for the image
@@ -58,7 +60,7 @@ public class CloudinaryImageUtility {
             // Set up input stream to read the image
             try (InputStream inputStream = httpURLConnection.getInputStream()) {
                 // Save the downloaded image to the specified destination path
-                Path destination = Paths.get(destinationPath, fileName + ".jpg");
+                Path destination = Paths.get(destinationPath, fileName+".png" );
                 try (FileOutputStream outputStream = new FileOutputStream(destination.toFile())) {
                     byte[] buffer = new byte[1024];
                     int bytesRead;
@@ -79,7 +81,7 @@ public class CloudinaryImageUtility {
                 .generate("your_cloudinary_folder/" + fileName + ".jpg");
     }
     public static void main(String[] args) {
-        //downloadImage("test.pnj", "C:\\Users\\LENOVO\\Desktop");
-        uploadImage("C:\\Users\\LENOVO\\OneDrive\\Images\\t1.jpg","me1.pnj");
+        uploadImage("C:\\Users\\LENOVO\\OneDrive\\Images\\t1.jpg","test");
+        downloadImage("test", "C:\\Users\\LENOVO\\Documents\\java_project\\demo1\\src\\main\\resources\\IMAGES");
     }
 }

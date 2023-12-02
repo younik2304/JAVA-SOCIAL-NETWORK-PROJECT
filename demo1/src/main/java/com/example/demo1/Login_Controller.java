@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login_Controller {
     @FXML
@@ -39,9 +41,11 @@ public class Login_Controller {
         if(email.isEmpty() || password.isEmpty() ){
             Test.showAlert("fields empty","you have to fill all the fields ");
         }else {
+           ;
             if (login(email, password)) {
                 try {
                     SceneSwitcher.switchScene("home.fxml",Test.getStage(loginButton),"home feed");
+
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -57,16 +61,7 @@ public class Login_Controller {
     @FXML
     void handleSignupButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-
-            Stage stage = (Stage) signupButton.getScene().getWindow();
-
-            stage.setScene(scene);
-            stage.setTitle("signup");
-            stage.show();
+            SceneSwitcher.switchScene("Signup.fxml",Test.getStage(loginButton),"signup");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -77,7 +72,7 @@ public class Login_Controller {
             DatabaseConnector databaseConnector = new DatabaseConnector();
             Connection connection = databaseConnector.getConnection();
 
-            String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+            String sql = "SELECT id,firstname,lastname,gender,phonenumber,profilepicture,address FROM users WHERE email = ? AND password = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
@@ -85,7 +80,16 @@ public class Login_Controller {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                return true;
+                int id =resultSet.getInt(1);
+                String firstname=resultSet.getString(2);
+                String lastname=resultSet.getString(3);
+                String gender =resultSet.getString(4);
+                String phonenumber=resultSet.getString(5);
+                String profilepicture=resultSet.getString(6);
+                String address=resultSet.getString(7);
+                User tempUser=new User(id,firstname,lastname,email,password,address,gender,phonenumber,profilepicture);
+                UserSession.setLog_user(tempUser);
+                return true ;
             }
 
             resultSet.close();

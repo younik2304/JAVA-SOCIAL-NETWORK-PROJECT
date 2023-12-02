@@ -1,9 +1,7 @@
-#navbar{
+#navbar,#footer{
     -fx-background-color :#373130;
 }
-#footer{
-    -fx-background-color :#373130;
-}
+
 #homefeed{
     -fx-background-color: black ;
 }

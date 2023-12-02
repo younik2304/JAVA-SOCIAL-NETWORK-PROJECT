@@ -1,13 +1,13 @@
 package com.example.demo1;
 
 public class UserSession {
-    private static int userId = -1;
+    private static User log_user;
 
-    public static int getUserId() {
-        return userId;
+    public static User getLog_user() {
+        return log_user;
     }
 
-    public static void setUserId(int newUserId) {
-        userId = newUserId;
+    public static void setLog_user(User log_user) {
+        UserSession.log_user = log_user;
     }
 }

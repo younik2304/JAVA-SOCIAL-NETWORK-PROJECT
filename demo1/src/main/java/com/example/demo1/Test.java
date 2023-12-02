@@ -32,4 +32,5 @@ public class Test {
     public static Stage getStage(Node node) {
         return (Stage) node.getScene().getWindow();
     }
+
 }
