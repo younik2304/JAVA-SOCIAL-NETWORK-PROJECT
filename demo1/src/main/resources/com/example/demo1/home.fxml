@@ -1,62 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane fx:controller="com.example.demo1.home_Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="709.0" stylesheets="@../../../STYLE/home_style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox fx:id="navbar" alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="500.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/homefeed.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="40.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/chat.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="40.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/user-xxl.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="40.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/search.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="40.0" />
-               </HBox.margin>
-            </ImageView>
-            <AnchorPane prefHeight="50.0" prefWidth="189.0">
-               <children>
-                  <ImageView fx:id="profile_picture" fitHeight="104.0" fitWidth="102.0" layoutX="135.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="user_id" layoutX="16.0" layoutY="24.0" prefHeight="60.0" prefWidth="136.0" text="Label" textFill="WHITE" />
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-   </top>
+<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
    <bottom>
-      <AnchorPane fx:id="footer" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #373130;" styleClass="footer" stylesheets="@../../../STYLE/home_style.css" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="footer" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #373130;" styleClass="footer" BorderPane.alignment="CENTER" />
    </bottom>
+   <top>
+      <AnchorPane fx:id="top" prefHeight="54.0" prefWidth="463.0" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="988.0" style="-fx-background-color: #373130;">
+               <children>
+                  <ImageView fx:id="homeIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/homefeed.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="userIcon" fitHeight="70.0" fitWidth="70.0" layoutX="330.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/user-xxl.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="365.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/search.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/chat.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="50.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
    <right>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="sidebar" prefHeight="580.0" prefWidth="181.0" style="-fx-background-color: #6a6f73;" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <AnchorPane fx:id="homefeed" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../STYLE/home_style.css" BorderPane.alignment="CENTER" />
-   </center>
+   <VBox spacing="10">
+      <children>
+         <!-- New AnchorPane for Manual Publication Entry -->
+         <AnchorPane prefHeight="78.0" prefWidth="840.0" style="-fx-background-color: lightgray;">
+            <children>
+               <TextField fx:id="description" prefHeight="68.0" prefWidth="474.0" promptText="Type a description for your publication " AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               <Button layoutX="14.0" layoutY="68.0" onAction="#loadImage" text="Load Image" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="68.0" />
+                  <ImageView fx:id="pub_image" fitHeight="90.0" fitWidth="136.0" layoutX="511.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: black;">
+                     <image>
+                        <Image url="@../../../../../../../../Screenshot%202023-12-12%20202550.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="671.0" layoutY="38.0" onAction="#sendPublication" text="send publication " />
+            </children>
+         </AnchorPane>
+         <!-- Existing ScrollPane for Publications -->
+         <ScrollPane fitToHeight="false" fitToWidth="false" maxHeight="600" prefHeight="576.0" prefWidth="838.0">
+            <content>
+               <!-- Existing VBox for Publications -->
+               <VBox fx:id="feed" prefHeight="503.0" prefWidth="835.0" spacing="30" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </VBox>
+            </content>
+         </ScrollPane>
+      </children>
+   </VBox>
+</center>
 </BorderPane>

@@ -9,3 +9,11 @@ CREATE TABLE users (
     gender VARCHAR(10) not null ,
     profilepicture varchar(255),
 );
+CREATE TABLE publications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    author_id INT,
+    description VARCHAR(255),
+    content TEXT,
+    timestamp TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES users(id)
+);

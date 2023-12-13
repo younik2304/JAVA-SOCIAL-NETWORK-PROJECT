@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="PublicationContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.PublicationController">
+   <children>
+      <AnchorPane prefHeight="61.0" prefWidth="410.0" style="-fx-background-color: black;">
+         <children>
+            <HBox fx:id="publicationUser" layoutX="3.0" prefHeight="57.0" prefWidth="404.0" />
+         </children>
+      </AnchorPane>
+      <ScrollPane fx:id="descriptioncontainer" prefHeight="71.0" prefWidth="404.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      <StackPane>
+         <children>
+            <!-- Background Region -->
+            <Region fx:id="backgroundRegion" prefHeight="243.0" prefWidth="404.0" style="-fx-background-color: #d8d9d9;" />
+            <!-- Centered ImageView -->
+            <ImageView fx:id="publicationImage" fitHeight="236.0" fitWidth="404.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <AnchorPane prefHeight="40.0" prefWidth="410.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView fitHeight="72.0" fitWidth="65.0" layoutX="303.0" layoutY="8.0" onMouseClicked="#addComment" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMAGES/arrow-33-xxl.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="comment" layoutX="26.0" layoutY="8.0" prefHeight="72.0" prefWidth="259.0" promptText="Add a comment " />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

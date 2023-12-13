@@ -3,13 +3,14 @@ package com.example.demo1;
 import java.util.List;
 
 public class User {
+    private static int numberOfUsers;
     private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String address;
-    private String gander ;
+    private String gender ;
     private String phone_number;
 
 
@@ -19,16 +20,19 @@ public class User {
     private List<Publication> publications;
     private List<Message> messages;
 
-    public User(int id, String firstName, String lastName, String email, String password, String address, String gander, String phone_number, String profilePicture) {
+
+
+    public User(int id, String firstName, String lastName, String email, String password, String address, String gender, String phone_number, String profilePicture) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.gander = gander;
+        this.gender = gender;
         this.phone_number = phone_number;
         this.profilePicture = profilePicture;
+        numberOfUsers++;
     }
 
     public int getId() {
@@ -80,11 +84,11 @@ public class User {
     }
 
     public String getGander() {
-        return gander;
+        return gender;
     }
 
     public void setGander(String gander) {
-        this.gander = gander;
+        this.gender = gander;
     }
 
     public String getPhone_number() {
@@ -122,5 +126,8 @@ public class User {
 
     public void sendMessage(User recipient, String messageText) {
         // Add logic to send messages.
+    }
+    public static int getNumberOfUsers() {
+        return numberOfUsers;
     }
 }

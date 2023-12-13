@@ -90,7 +90,7 @@ public class signup_Controller {
             int userId = insertUser(firstNameText, lastNameText, phoneNumberText, addressText, emailText, passwordText, genderText);
 
             if (userId != -1) {
-                CloudinaryImageUtility.uploadImage(imagepath, String.valueOf(userId));
+                CloudinaryImageUtility.uploadProfileImage(imagepath, String.valueOf(userId));
                 updateUserProfilePicture(userId, String.valueOf(userId));
 
                 // Use the getStage method to get the current stage

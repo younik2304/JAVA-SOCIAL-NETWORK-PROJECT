@@ -1,39 +1,47 @@
 package com.example.demo1;
 
+import com.example.demo1.DatabaseConnector;
+
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class DatabaseTest {
     public static void main(String[] args) {
         DatabaseConnector databaseConnector = new DatabaseConnector();
 
         // Attempt to establish a database connection.
-        Connection connection = databaseConnector.getConnection();
+        try (Connection connection = databaseConnector.getConnection()) {
+            if (connection != null) {
+                // Insert values into the 'publications' table.
+                String insertQuery = "delete from table publications";
 
-        if (connection != null) {
-            try {
-                // Create a statement to execute SQL queries.
-                Statement statement = connection.createStatement();
+                try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                    // Set values for the parameters
+                   /* preparedStatement.setInt(1, 12); // Replace with the actual author_id
+                    preparedStatement.setString(2, "Sample Description");
+                    preparedStatement.setString(3, "4");
+                    preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis())); // Use the current timestamp
+*/
+                    // Execute the insert statement
+                    int rowsAffected = preparedStatement.executeUpdate();
 
-                // Insert values into the 'users' table.
-                String selectQuery = "CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, phonenumber VARCHAR(20) NOT NULL, address VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, gender VARCHAR(10) NOT NULL, profilepicture VARCHAR(255));";
-
-
-                // Execute the INSERT query.
-                statement.executeUpdate(selectQuery.strip());
-               //while(r.next()) {
-                 //  System.out.println(r.getString("email"));
-               //}
-                // Close the statement and connection.
-                statement.close();
+                    if (rowsAffected > 0) {
+                        System.out.println("Row inserted successfully.");
+                    } else {
+                        System.out.println("Failed to insert row.");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
                 System.out.println("Database connection closed.");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else {
+                System.out.println("Failed to connect to the Oracle database.");
             }
-        } else {
-            System.out.println("Failed to connect to the Oracle database.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
