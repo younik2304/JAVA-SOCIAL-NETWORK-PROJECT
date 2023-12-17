@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="PublicationContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.PublicationController">
+   <children>
+      <AnchorPane prefHeight="61.0" prefWidth="410.0" style="-fx-background-color: black;">
+         <children>
+            <HBox fx:id="publicationUser" layoutX="3.0" prefHeight="57.0" prefWidth="404.0" />
+         </children>
+      </AnchorPane>
+      <ScrollPane fx:id="descriptionContainer" prefHeight="51.0" prefWidth="410.0" />
+      <StackPane>
+         <children>
+            <!-- Background Region -->
+            <Region fx:id="backgroundRegion" prefHeight="243.0" prefWidth="404.0" style="-fx-background-color: #d8d9d9;" />
+            <!-- Centered ImageView -->
+            <ImageView fx:id="publicationImage" fitHeight="236.0" fitWidth="404.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <HBox prefHeight="46.0" prefWidth="410.0">
+         <children>
+            <Button fx:id="comments" mnemonicParsing="false" prefHeight="45.0" prefWidth="220.0" text="Comments " />
+            <Button fx:id="sharePublication" mnemonicParsing="false" onAction="#sharePublicationClicked" prefHeight="48.0" prefWidth="223.0" text="share" />
+            <Button fx:id="deletePublication" mnemonicParsing="false" onAction="#deletePublicationClicked" prefHeight="46.0" prefWidth="33.0">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" smooth="true">
+                     <image>
+                        <Image url="@../../../IMAGES/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+
+<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
+   <top>
+            <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="994.0" style="-fx-background-color: #373130;">
+               <children>
+                  <ImageView fx:id="homeIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/homefeed.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="userIcon" fitHeight="70.0" fitWidth="70.0" layoutX="330.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/user-xxl.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="365.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/search.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../IMAGES/chat.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" right="50.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+
+
+   </top>
+   <center>
+   <VBox spacing="10" fx:id="center">
+      <children>
+         <!-- New AnchorPane for Manual Publication Entry -->
+
+         <!-- Existing ScrollPane for Publications -->
+         <ScrollPane fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="600" prefHeight="576.0" prefWidth="838.0">
+            <content>
+               <!-- Existing VBox for Publications -->
+               <VBox fx:id="feed" prefHeight="503.0" prefWidth="835.0" spacing="30" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets left="100.0" />
+                     </padding>
+                  </VBox>
+            </content>
+         </ScrollPane>
+      </children>
+   </VBox>
+</center>
+   <stylesheets>
+      <URL value="@../../../STYLE/login_style.css" />
+   </stylesheets>
+   <right>
+      <VBox fx:id="sidebar" prefHeight="602.0" prefWidth="147.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <HBox prefHeight="46.0" prefWidth="988.0" style="-fx-background-color: #373130;" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
