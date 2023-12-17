@@ -132,6 +132,6 @@ public class CloudinaryImageUtility {
         //uploadImage("C:\\Users\\LENOVO\\OneDrive\\Images\\chat.png","1");
         //uploadImage("C:\\\\Users\\\\LENOVO\\\\Documents\\\\java_project\\\\demo1\\\\src\\\\main\\\\resources\\\\IMAGES\\homefeed.png","3");
         //uploadImage("C:\\\\Users\\\\LENOVO\\\\Documents\\\\java_project\\\\demo1\\\\src\\\\main\\\\resources\\\\IMAGES\\default.png","4");
-        //downloadImage("test", "C:\\Users\\LENOVO\\Documents\\java_project\\demo1\\src\\main\\resources\\IMAGES");
+        //downloadProfileImage("default.png", "C:\\Users\\LENOVO\\Documents\\java_project\\demo1\\src\\main\\resources\\IMAGES");
     }
 }

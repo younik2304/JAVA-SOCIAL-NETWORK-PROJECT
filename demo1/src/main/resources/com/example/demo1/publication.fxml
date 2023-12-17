@@ -8,18 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="PublicationContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.PublicationController">
+<VBox fx:id="PublicationContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.PublicationController">
    <children>
       <AnchorPane prefHeight="61.0" prefWidth="410.0" style="-fx-background-color: black;">
          <children>
             <HBox fx:id="publicationUser" layoutX="3.0" prefHeight="57.0" prefWidth="404.0" />
          </children>
       </AnchorPane>
-      <ScrollPane fx:id="descriptioncontainer" prefHeight="71.0" prefWidth="404.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
+      <ScrollPane fx:id="descriptionContainer" prefHeight="51.0" prefWidth="410.0" />
       <StackPane>
          <children>
             <!-- Background Region -->
@@ -28,15 +24,20 @@
             <ImageView fx:id="publicationImage" fitHeight="236.0" fitWidth="404.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
-      <AnchorPane prefHeight="40.0" prefWidth="410.0" style="-fx-background-color: grey;">
+      <HBox prefHeight="46.0" prefWidth="410.0">
          <children>
-            <ImageView fitHeight="72.0" fitWidth="65.0" layoutX="303.0" layoutY="8.0" onMouseClicked="#addComment" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/arrow-33-xxl.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="comment" layoutX="26.0" layoutY="8.0" prefHeight="72.0" prefWidth="259.0" promptText="Add a comment " />
+            <Button fx:id="comments" mnemonicParsing="false" prefHeight="45.0" prefWidth="220.0" text="Comments " />
+            <Button fx:id="sharePublication" mnemonicParsing="false" onAction="#sharePublicationClicked" prefHeight="48.0" prefWidth="223.0" text="share" />
+            <Button fx:id="deletePublication" mnemonicParsing="false" onAction="#deletePublicationClicked" prefHeight="46.0" prefWidth="33.0">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" smooth="true">
+                     <image>
+                        <Image url="@../../../IMAGES/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
-      </AnchorPane>
+      </HBox>
    </children>
 </VBox>

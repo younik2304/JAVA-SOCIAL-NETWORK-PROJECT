@@ -21,6 +21,25 @@ public class DatabaseConnector {
         }
     }
 
+    public static boolean deletePublication(Publication publication) {
+        // Delete the specified publication from the 'publications' table.
+        String deleteQuery = "DELETE FROM publications WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+            // Set values for the parameters
+            preparedStatement.setInt(1, publication.getId());
+
+            // Execute the delete statement
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false; // Return false to indicate failure
+    }
+
     public Connection getConnection() {
         return connection;
     }
@@ -61,6 +80,7 @@ public class DatabaseConnector {
 
         return publications;
     }
+
     public static List<Publication> getUserPublications(int userId) throws SQLException {
         List<Publication> userPublications = new ArrayList<>();
 
@@ -164,7 +184,7 @@ public class DatabaseConnector {
                 // Retrieve the generated keys (in this case, the ID of the inserted publication)
                 ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
                 if (generatedKeys.next()) {
-                    updatePublicationContent( generatedKeys.getInt(1), String.valueOf(generatedKeys.getInt(1)));
+                    updatePublicationContent(generatedKeys.getInt(1), String.valueOf(generatedKeys.getInt(1)));
                     return generatedKeys.getInt(1);
                 }
             }
@@ -174,6 +194,7 @@ public class DatabaseConnector {
 
         return -1; // Return -1 to indicate failure
     }
+
     public static boolean updatePublicationContent(int publicationId, String newContent) {
         // Update the 'publications' table to set a new content for the specified publication ID.
         String updateQuery = "UPDATE publications SET content = ? WHERE id = ?";
@@ -194,6 +215,30 @@ public class DatabaseConnector {
         return false; // Return false to indicate failure
     }
 
+    public static void sharePublication(Publication p ) {
+        // Insert values into the 'publications' table.
+        String insertQuery = "INSERT INTO publications (author_id, description, content, timestamp) VALUES (?, ?, ?, ?)";
 
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
+            // Set values for the parameters
+            preparedStatement.setInt(1, UserSession.getLog_user().getId());
+            preparedStatement.setString(2, p.getDescription());
+            preparedStatement.setString(3, p.getContent());
+            preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 
+            // Execute the insert statement
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                Test.showAlert("Publication","you have share the publication of : "+p.getAuthor().getFirstName()+" "+p.getAuthor().getLastName());
+            }
+            else
+                Test.showAlert("error","couldnt share the publication");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+

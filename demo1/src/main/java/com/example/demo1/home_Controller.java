@@ -28,25 +28,20 @@ public class home_Controller {
     private HBox navbar;
 
     @FXML
-    private AnchorPane top;
+    private VBox sidebar;
 
-    @FXML
-    private AnchorPane footer;
-    @FXML
-    private AnchorPane sidebar;
     @FXML
     private VBox feed;
-    @FXML
-    private TextField description;
+
 
     @FXML
-    private ImageView pub_image;
-    private static String imagepath="";
+    private VBox center;
+
     @FXML
     private ImageView homeIcon;
     @FXML
     private ImageView userIcon;
-
+    private AnchorPane manualPublicationAnchorPane;
 
 
 
@@ -60,7 +55,14 @@ public class home_Controller {
         //Test.createUserProfile(profile,userName,userImage,50);
         // Add UserProfile to the top AnchorPane
         Test.addEventHandlers(profile,UserSession.getLog_user());
+        FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource("ajouterpub.fxml"));
+        try {
+            manualPublicationAnchorPane = anchorPaneLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException("Error loading AnchorPane: " + e.getMessage());
+        }
         navbar.getChildren().add(profile);
+        center.getChildren().add(manualPublicationAnchorPane);
         populateSidebarWithUsers();
         populateFeedWithPublications();
         homeIcon.setOnMouseClicked(event -> {
@@ -85,7 +87,7 @@ public class home_Controller {
         List<User> userList = DatabaseConnector.getUsers();
 
         // Create a VBox to hold user profiles in the sidebar
-        VBox userProfilesVBox = new VBox(User.getNumberOfUsers()); // Adjust the spacing between user profiles
+        //VBox userProfilesVBox = new VBox(User.getNumberOfUsers()); // Adjust the spacing between user profiles
 
         // Populate the VBox with user profiles
         for (User user : userList) {
@@ -95,16 +97,19 @@ public class home_Controller {
             // Pass the user to addEventHandlers
             Test.addEventHandlers(userProfile, user);
 
-            userProfilesVBox.getChildren().add(userProfile);
+            sidebar.getChildren().add(userProfile);
         }
 
         // Add the VBox to the sidebar
-        sidebar.getChildren().add(userProfilesVBox);
+        //sidebar.getChildren().add(userProfilesVBox);
     }
 
 
 
-    private void populateFeedWithPublications() {
+    public  void populateFeedWithPublications() {
+        if ( !center.getChildren().contains(manualPublicationAnchorPane)) {
+            center.getChildren().add(manualPublicationAnchorPane);
+        }
         // Fetch the list of publications from the database
         List<Publication> publicationList = null;
         try {
@@ -123,6 +128,8 @@ public class home_Controller {
             try {
                 VBox publicationContainer = loader.load();
                 PublicationController publicationController = loader.getController();
+
+                // Set the associated Publication
                 publicationController.setPublication(publication);
 
                 feed.getChildren().add(publicationContainer);
@@ -134,7 +141,17 @@ public class home_Controller {
         }
 
     }
+
+
     public  void  populateCenterWithUserPublications(User user) {
+        if(user.getId()==UserSession.getLog_user().getId()) {
+            if (!center.getChildren().contains(manualPublicationAnchorPane)) {
+                center.getChildren().add(manualPublicationAnchorPane);
+            }
+        }else
+        if (center.getChildren().contains(manualPublicationAnchorPane)) {
+            center.getChildren().remove(manualPublicationAnchorPane);
+        }
         // Fetch the list of publications for the selected user from the database
         List<Publication> userPublications = null;
         try {
@@ -153,6 +170,8 @@ public class home_Controller {
             try {
                 VBox publicationContainer = loader.load();
                 PublicationController publicationController = loader.getController();
+
+                // Set the associated Publication
                 publicationController.setPublication(publication);
 
                 feed.getChildren().add(publicationContainer);
@@ -162,64 +181,10 @@ public class home_Controller {
                 System.err.println("Error loading publication: " + e.getMessage());
             }
         }
-    }
-
-    public void loadImage(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose a Profile Picture");
-
-        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
-        fileChooser.getExtensionFilters().add(imageFilter);
-
-        File selectedFile = fileChooser.showOpenDialog(Test.getStage(feed));
-        if (selectedFile != null) {
-            // Get the file path without the file: prefix
-            String imagePath = selectedFile.toURI().getPath();
-
-            // Upload the image to Cloudinary using the file path
-            //
-            // Display the image in your UI if needed
-            Image image = new Image("file:" + imagePath);
-            pub_image.setImage(image);
-            imagepath=imagePath;
-        }
-    }
-
-    public void sendPublication(ActionEvent actionEvent) {
-        // Get the user ID of the currently logged-in user
-        int authorId = UserSession.getLog_user().getId();
-
-        // Get the description from the TextField
-        String descriptionText = description.getText();
-
-        // Check if the user has selected an image
-        if (imagepath.isEmpty()) {
-            // Handle the case where no image is selected (optional)
-            System.out.println("No image selected for the publication.");
-            return;
-        }
-        int publicationAdded = DatabaseConnector.addPublication(authorId, descriptionText);
-        // Upload the image to Cloudinary and get the public ID
-        CloudinaryImageUtility.uploadPublicationImage(imagepath, String.valueOf(publicationAdded));
-
-        // Add the publication to the database
-
-
-        if (publicationAdded!=-1) {
-            System.out.println("Publication sent successfully.");
-            // Optionally, clear the description TextField and reset the image
-            description.clear();
-            pub_image.setImage(null);
-            imagepath = "";
-            populateFeedWithPublications();
-        } else {
-            Test.showAlert("Failed to send publication.","no return id ");
-            // Handle the case where the publication couldn't be added to the database
-        }
 
     }
-
-
 }
+
+
 
 

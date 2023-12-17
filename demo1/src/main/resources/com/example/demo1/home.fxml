@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 
-<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
-   <bottom>
-      <AnchorPane fx:id="footer" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #373130;" styleClass="footer" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
    <top>
-      <AnchorPane fx:id="top" prefHeight="54.0" prefWidth="463.0" BorderPane.alignment="CENTER_LEFT">
-         <children>
-            <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="988.0" style="-fx-background-color: #373130;">
+            <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="994.0" style="-fx-background-color: #373130;">
                <children>
                   <ImageView fx:id="homeIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -50,35 +47,21 @@
                   </ImageView>
                </children>
             </HBox>
-         </children>
-      </AnchorPane>
+
+
    </top>
-   <right>
-      <AnchorPane fx:id="sidebar" prefHeight="580.0" prefWidth="181.0" style="-fx-background-color: #6a6f73;" BorderPane.alignment="CENTER" />
-   </right>
    <center>
-   <VBox spacing="10">
+   <VBox spacing="10" fx:id="center">
       <children>
          <!-- New AnchorPane for Manual Publication Entry -->
-         <AnchorPane prefHeight="78.0" prefWidth="840.0" style="-fx-background-color: lightgray;">
-            <children>
-               <TextField fx:id="description" prefHeight="68.0" prefWidth="474.0" promptText="Type a description for your publication " AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-               <Button layoutX="14.0" layoutY="68.0" onAction="#loadImage" text="Load Image" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="68.0" />
-                  <ImageView fx:id="pub_image" fitHeight="90.0" fitWidth="136.0" layoutX="511.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: black;">
-                     <image>
-                        <Image url="@../../../../../../../../Screenshot%202023-12-12%20202550.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="671.0" layoutY="38.0" onAction="#sendPublication" text="send publication " />
-            </children>
-         </AnchorPane>
+
          <!-- Existing ScrollPane for Publications -->
-         <ScrollPane fitToHeight="false" fitToWidth="false" maxHeight="600" prefHeight="576.0" prefWidth="838.0">
+         <ScrollPane fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="600" prefHeight="576.0" prefWidth="838.0">
             <content>
                <!-- Existing VBox for Publications -->
-               <VBox fx:id="feed" prefHeight="503.0" prefWidth="835.0" spacing="30" BorderPane.alignment="CENTER">
+               <VBox fx:id="feed" prefHeight="503.0" prefWidth="835.0" spacing="30" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
                      <padding>
-                        <Insets left="50.0" />
+                        <Insets left="100.0" />
                      </padding>
                   </VBox>
             </content>
@@ -86,4 +69,13 @@
       </children>
    </VBox>
 </center>
+   <stylesheets>
+      <URL value="@../../../STYLE/login_style.css" />
+   </stylesheets>
+   <right>
+      <VBox fx:id="sidebar" prefHeight="602.0" prefWidth="147.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <HBox prefHeight="46.0" prefWidth="988.0" style="-fx-background-color: #373130;" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

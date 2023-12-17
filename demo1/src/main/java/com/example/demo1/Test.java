@@ -58,29 +58,32 @@ public class Test {
 
     public static Image returnUserProfileImage(String profilePictureName) {
         String profilePicturePath = "C:\\Users\\LENOVO\\Documents\\java_project\\demo1\\src\\main\\resources\\UserProfiles";
-        CloudinaryImageUtility.downloadProfileImage(profilePictureName, profilePicturePath);
+        File profilePictureFile = new File(profilePicturePath, profilePictureName + ".png");
 
-        // Construct the file URL
-        File file = new File(profilePicturePath, profilePictureName + ".png");
+        if (!profilePictureFile.exists()) {
+            // If the file doesn't exist locally, download it from Cloudinary
+            CloudinaryImageUtility.downloadProfileImage(profilePictureName, profilePicturePath);
+        }
+
         String imageUrl = null;
         try {
-            imageUrl = file.toURI().toURL().toExternalForm();
+            imageUrl = profilePictureFile.toURI().toURL().toExternalForm();
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
 
-        // Create the Image object
         return new Image(imageUrl);
     }
 
     public static Image returnPublicationImage(String contentImageName) {
-        // Logic to download and retrieve the publication content image
-        // Adjust the path and other details based on your implementation
         String contentImagePath = "C:\\Users\\LENOVO\\Documents\\java_project\\demo1\\src\\main\\resources\\PUBLICATION_IMAGES";
-        CloudinaryImageUtility.downloadPublicationImage(contentImageName, contentImagePath);
-
-        // Construct the file URL for the publication content image
         File contentImageFile = new File(contentImagePath, contentImageName + ".png");
+
+        if (!contentImageFile.exists()) {
+            // If the file doesn't exist locally, download it from Cloudinary
+            CloudinaryImageUtility.downloadPublicationImage(contentImageName, contentImagePath);
+        }
+
         String contentImageUrl = null;
         try {
             contentImageUrl = contentImageFile.toURI().toURL().toExternalForm();
@@ -88,7 +91,6 @@ public class Test {
             throw new RuntimeException(e);
         }
 
-        // Create the Image object for the publication content image
         return new Image(contentImageUrl);
     }
 
@@ -180,10 +182,11 @@ public class Test {
         }
 
         home_Controller controller = loader.getController();
+        controller.populateCenterWithUserPublications(user);
 
         // Replace 'yourAnchorPane' with the actual anchor pane holding your content
         // This assumes that the 'home_Controller' class has a reference to the 'feed' VBox
-        controller.populateCenterWithUserPublications(user);
+        //controller.populateCenterWithUserPublications(user);
 
         // Set the new scene
         Scene scene = new Scene(root);
