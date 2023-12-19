@@ -14,7 +14,12 @@ public class DatabaseTest {
         try (Connection connection = databaseConnector.getConnection()) {
             if (connection != null) {
                 // Delete all rows from the 'publications' table.
-                String deleteQuery = "DELETE FROM publications";
+                String deleteQuery = "CREATE TABLE friendships (\n" +
+                        "    friendship_id INT PRIMARY KEY,\n" +
+                        "    user1_id INT,\n" +
+                        "    user2_id INT,\n" +
+                        "    status VARCHAR(50) -- 'PENDING', 'ACCEPTED', 'REJECTED', etc.\n" +
+                        ");";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
                     // Execute the delete statement

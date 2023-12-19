@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 
-<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
+<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
    <top>
             <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="994.0" style="-fx-background-color: #373130;">
                <children>
@@ -37,6 +37,11 @@
                         <Insets left="30.0" right="20.0" />
                      </HBox.margin>
                   </ImageView>
+            <ImageView fx:id="friendRequests" fitHeight="73.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMAGES/add-user-xxl.png" />
+               </image>
+            </ImageView>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../IMAGES/chat.png" />
@@ -51,12 +56,26 @@
 
    </top>
    <center>
-   <VBox spacing="10" fx:id="center">
+   <VBox fx:id="center" spacing="10">
       <children>
+            <HBox alignment="BASELINE_CENTER" prefHeight="35.0" prefWidth="731.0">
+               <children>
+                  <Button fx:id="addPub" mnemonicParsing="false" text="Add Publication">
+                     <HBox.margin>
+                        <Insets right="40.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="userInfos" mnemonicParsing="false" text="show user infos ">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          <!-- New AnchorPane for Manual Publication Entry -->
 
          <!-- Existing ScrollPane for Publications -->
-         <ScrollPane fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="600" prefHeight="576.0" prefWidth="838.0">
+         <ScrollPane fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="632.0" prefHeight="632.0" prefWidth="731.0">
             <content>
                <!-- Existing VBox for Publications -->
                <VBox fx:id="feed" prefHeight="503.0" prefWidth="835.0" spacing="30" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">

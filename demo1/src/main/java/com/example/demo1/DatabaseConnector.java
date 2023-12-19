@@ -40,6 +40,37 @@ public class DatabaseConnector {
         return false; // Return false to indicate failure
     }
 
+    public static List<User> getUserByName(String text) {
+        String[] name=text.split(" ");
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE firstname = ? and lastname = ?;")) {
+            preparedStatement.setString(1, name[0]);
+            preparedStatement.setString(2, name[1]);
+            List<User>users=new ArrayList<>();
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String firstName = resultSet.getString("firstname");
+                    String lastName = resultSet.getString("lastname");
+                    String phonenumber = resultSet.getString("phonenumber");
+                    String address = resultSet.getString("address");
+                    String email = resultSet.getString("email");
+                    String password = resultSet.getString("password");
+                    String gender = resultSet.getString("gender");
+                    String profilepicture = resultSet.getString("profilepicture");
+
+                    users.add( new User(id, firstName, lastName, email, password, address, gender, phonenumber, profilepicture));
+                }
+                return users;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions appropriately based on your application's requirements
+        }
+
+        return null;
+    }
+
     public Connection getConnection() {
         return connection;
     }
@@ -236,6 +267,47 @@ public class DatabaseConnector {
                 Test.showAlert("error","couldnt share the publication");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    public static void addFriendRequest(int senderId,int receiverId){
+        try(PreparedStatement statement = connection.prepareStatement(FriendRequestService.ADD_FRIEND_REQUEST_SQL)) {
+            statement.setInt(1, senderId);
+            statement.setInt(2, receiverId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static List<Friendship> getFriendRequests() {
+        List<Friendship> friendRequests = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(FriendRequestService.GET_FRIEND_REQUESTS_SQL)) {
+            statement.setInt(1, UserSession.getLog_user().getId());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Friendship request = new Friendship();
+                    request.setFriendshipId(resultSet.getInt("friendship_id"));
+                    request.setUser1Id(resultSet.getInt("user1_id"));
+                    request.setUser2Id(resultSet.getInt("user2_id"));
+                    request.setStatus(resultSet.getString("status"));
+                    friendRequests.add(request);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception
+        }
+
+        return friendRequests;
+    }
+    public static void updateFriendRequestStatus(int friendshipId, String updateSql) {
+        try (PreparedStatement statement = connection.prepareStatement(updateSql)) {
+            statement.setInt(1, friendshipId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception
         }
     }
 }

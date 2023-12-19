@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane prefHeight="78.0" prefWidth="840.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.addPubController">
-    <children>
-        <TextField fx:id="description" prefHeight="68.0" prefWidth="474.0" promptText="Type a description for your publication " AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-        <Button layoutX="14.0" layoutY="68.0" onAction="#loadImage" styleClass="btn" text="Load Image" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="68.0" />
-        <ImageView fx:id="pub_image" fitHeight="110.0" fitWidth="122.0" layoutX="528.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" >
-            <image>
-                <Image url="@../../../IMAGES/user-xxl.png" />
-            </image>
-        </ImageView>
-        <Button layoutX="659.0" layoutY="5.0" onAction="#sendPublication" prefHeight="107.0" prefWidth="143.0" styleClass="btn" text="send publication " />
-    </children>
-</AnchorPane>
+
+<VBox alignment="CENTER" prefHeight="528.0" prefWidth="744.0" style="-fx-background-color: #3528bd;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.addPubController">
+   <children>
+      <TextField fx:id="description" prefHeight="72.0" prefWidth="679.0" promptText="Type a description for your publication ">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </VBox.margin></TextField>
+      <ImageView fx:id="pub_image" fitHeight="425.0" fitWidth="378.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../IMAGES/user-xxl.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER" prefHeight="51.0" prefWidth="744.0">
+         <children>
+            <Button onAction="#loadImage" styleClass="btn" text="Load Image">
+               <HBox.margin>
+                  <Insets right="40.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

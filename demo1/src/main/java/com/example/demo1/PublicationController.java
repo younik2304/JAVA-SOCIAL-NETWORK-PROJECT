@@ -42,6 +42,12 @@ public class PublicationController {
 
     private Publication publication;
 
+    private home_Controller homeController;
+
+    public void setHomeController(home_Controller homeController) {
+        this.homeController = homeController;
+    }
+
     public void initialize() {
         // Add initialization logic if needed
     }
@@ -101,6 +107,9 @@ public class PublicationController {
                 dialog.showAndWait().ifPresent(newDescription -> {
                     associatedPublication.setDescription(newDescription);
                     DatabaseConnector.sharePublication(associatedPublication);
+                    if (homeController != null) {
+                        homeController.refreshFeed();
+                    }
                 });
             }
         }
@@ -121,24 +130,17 @@ public class PublicationController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 // User clicked OK, delete the publication
-                boolean del=DatabaseConnector.deletePublication(associatedPublication);
-                if(del) {
-                    Test.showAlert("Deletion of publication is succesfull", "you will be prompted to the home feed ");
-                    FXMLLoader loader = new FXMLLoader(Test.class.getResource("home.fxml"));
-                    Parent root;
-                    try {
-                        root = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
+                boolean del = DatabaseConnector.deletePublication(associatedPublication);
+                if (del) {
+                    Test.showAlert("Deletion of publication is successful", "you will be prompted to the home feed ");
+                    if (homeController != null) {
+                        homeController.refreshFeed();
                     }
+                } else {
+                    Test.showAlert("error", "error deleting the publication");
+                }
 
-                    home_Controller controller = loader.getController();
-                    controller.populateFeedWithPublications();
 
-                }else
-                    Test.showAlert("error","error deleting the publication");
-                // You can perform additional actions if needed
             }
         }
     }
