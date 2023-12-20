@@ -14,12 +14,15 @@ public class DatabaseTest {
         try (Connection connection = databaseConnector.getConnection()) {
             if (connection != null) {
                 // Delete all rows from the 'publications' table.
-                String deleteQuery = "CREATE TABLE friendships (\n" +
-                        "    friendship_id INT PRIMARY KEY,\n" +
-                        "    user1_id INT,\n" +
-                        "    user2_id INT,\n" +
-                        "    status VARCHAR(50) -- 'PENDING', 'ACCEPTED', 'REJECTED', etc.\n" +
-                        ");";
+                String deleteQuery = "CREATE TABLE comments (\n" +
+                        "    id INT PRIMARY KEY AUTO_INCREMENT,\n" +
+                        "    publication_id INT,\n" +
+                        "    commenter_id INT,\n" +
+                        "    text TEXT,\n" +
+                        "    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n" +
+                        "    FOREIGN KEY (publication_id) REFERENCES publications(id),\n" +
+                        "    FOREIGN KEY (commenter_id) REFERENCES users(id)\n" +
+                        ");\n";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
                     // Execute the delete statement

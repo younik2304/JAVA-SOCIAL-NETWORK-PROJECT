@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.example.demo1.Friendship.FriendshipStatus;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -81,17 +82,37 @@ public class home_Controller {
         } catch (IOException e) {
             throw new RuntimeException("Error loading AnchorPane: " + e.getMessage());
         }
-        FXMLLoader infos = new FXMLLoader(getClass().getResource("UserInfos.fxml"));
-        VBox userinfos;
+        FXMLLoader infosLoader = new FXMLLoader(getClass().getResource("UserInfos.fxml"));
+        HBox userinfos;
         try {
-            userinfos = infos.load();
-            // Get the controller and set the home_Controller instance
+            userinfos = infosLoader.load();
+            // Get the controller without setting the stage
+            UserInfos controller = infosLoader.getController();
+            controller.initialize();
 
-            // Set the stage for addPubController
+            userInfos.setOnMouseClicked(e -> {
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                alert.setTitle("User infos");
+
+                // Set the content of the Alert to userinfos
+                alert.getDialogPane().setContent(userinfos);
+
+                // Add a custom button to the alert to handle closing
+                ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(closeButton);
+
+                // Show the Alert
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == closeButton) {
+                        // Handle the close button action if needed
+                    }
+                });
+            });
 
         } catch (IOException e) {
-            throw new RuntimeException("Error loading AnchorPane: " + e.getMessage());
+            System.out.println("Error loading UserInfos.fxml: " + e.getMessage());
         }
+
 
         // Set up the event handler for the addPub button
         addPub.setOnMouseClicked(event -> {
@@ -146,23 +167,16 @@ public class home_Controller {
             populateCenterWithUserPublications(UserSession.getLog_user());
         });
         friendRequests.setOnMouseClicked(event->{
-            displayFriendRequests();
-        });
-        userinfos.setOnMouseClicked(e->{
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setTitle("User infos");
-
-            // Set the content of the Alert to manualPublicationAnchorPane
-            alert.getDialogPane().setContent(userinfos);
-            UserInfos controller = infos.getController();
+            //displayFriendRequests();
         });
         Button logout=new Button("log out ");
+        footer.getChildren().add(logout);
         logout.setOnAction(e->{
             UserSession.logout(this);
         });
     }
 
-    public void displayFriendRequests() {
+  /*  public void displayFriendRequests() {
         feed.getChildren().clear();
         feed.setPrefHeight(652.0);
         AnchorPane search  = new AnchorPane();
@@ -179,28 +193,45 @@ public class home_Controller {
         searchButton.setLayoutY(10.0);
         search.getChildren().addAll(searchField,searchButton);
         feed.getChildren().add(search);
-        List<Friendship> fr_req=DatabaseConnector.getFriendRequests();
         searchButton.setOnAction(event -> displaysearchedUsers(searchField.getText()));
+        List<User> users = DatabaseConnector.getAllUsers();
 
-        for (Friendship friendship : fr_req)
-        {
-            HBox friendReq=new HBox();
-            Button accept=new Button("accept");
-            Button refuse=new Button("refuse");
-            User user =DatabaseConnector.getUserById(friendship.getUser1Id());
-            Image userImage = Test.returnUserProfileImage(user.getProfilePicture());
-            AnchorPane userProfile = Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), userImage, 50);
-            friendReq.getChildren().addAll(userProfile,accept,refuse);
-            accept.setOnAction(event -> FriendRequestService.acceptFriendRequest(friendship.getFriendshipId(),this));
-            refuse.setOnAction(event -> FriendRequestService.rejectFriendRequest(friendship.getFriendshipId(),this));
+        for (User user : users) {
+            HBox userBox = new HBox();
 
-            feed.getChildren().add(friendReq);
+            // Check the friendship status
+            Friendship status = DatabaseConnector.getFriendshipStatus(loggedInUserId, user.getId());
+
+            // Create buttons based on the friendship status
+            Button actionButton;
+            if (status == FriendshipStatus.PENDING) {
+                // Display buttons for pending friend requests
+                Button acceptButton = new Button("Accept");
+                Button rejectButton = new Button("Reject");
+
+                // Set actions for accept and reject buttons
+                acceptButton.setOnAction(event -> acceptFriendRequest(status.getFriendshipId()));
+                rejectButton.setOnAction(event -> rejectFriendRequest(status.getFriendshipId()));
+
+                userBox.getChildren().addAll(createUserProfile(user), acceptButton, rejectButton);
+            } else if (status == FriendshipStatus.FRIEND) {
+                // If already friends, don't display anything
+                userBox.getChildren().add(createUserProfile(user));
+            } else {
+                // Display a button for sending a friend request
+                Button sendRequestButton = new Button("Send Request");
+                sendRequestButton.setOnAction(event -> sendFriendRequest(user.getId()));
+
+                userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName()+ " "+user.getLastName(),, sendRequestButton);
+            }
+
+            feed.getChildren().add(userBox);
         }
     }
-
+*/
     private void displaysearchedUsers(String searchField) {
         List <User> users=DatabaseConnector.getUserByName(searchField);
-        DatabaseConnector.get
+        //DatabaseConnector.get
     }
 
     private void populateSidebarWithUsers() throws SQLException {
@@ -302,6 +333,10 @@ public class home_Controller {
             }
         }
 
+    }
+
+    public VBox getFeed() {
+        return feed;
     }
 }
 

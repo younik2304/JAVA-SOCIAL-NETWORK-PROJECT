@@ -5,36 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac560403-6328-4a44-a998-69f6a36d4704" name="Changes" comment="everything is fine  now with the signup and login work on button annd home feed">
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequestService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friendship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/IMAGES/add-user-xxl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/20.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/21.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/22.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/23.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/24.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/26.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/27.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/28.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/UserInfos.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friendship.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friendship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/addPubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/addPubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/ajouterpub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/ajouterpub.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/PublicationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/PublicationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/addPubController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/addPubController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/ajouterpub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/ajouterpub.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/UserSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/UserSession.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" afterDir="false" />
     </list>
@@ -57,6 +41,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -74,7 +61,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;25274744&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/LENOVO/Documents/java_project/demo1/src/main/java/com/example/demo1&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/Desktop/sql/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,

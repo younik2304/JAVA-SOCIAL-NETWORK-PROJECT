@@ -1,5 +1,7 @@
 package com.example.demo1;
 
+import javafx.scene.chart.PieChart;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +71,52 @@ public class DatabaseConnector {
         }
 
         return null;
+    }
+    public static void addComment(int publicationId, int commenterId, String commentText) throws SQLException {
+        // Ensure you have a valid connection (you can adjust this based on your actual database connection logic)... obtain connection
+
+                // SQL query to insert a new comment
+                String query = "INSERT INTO comments (publication_id, commenter_id, text, timestamp) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            // Set parameters for the query
+            preparedStatement.setInt(1, publicationId);
+            preparedStatement.setInt(2, commenterId);
+            preparedStatement.setString(3, commentText);
+
+            // Set the timestamp to the current time
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            preparedStatement.setTimestamp(4, timestamp);
+
+            // Execute the update
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    public static List<Comment> getCommentsForPublication(int publicationId) throws SQLException {
+        List<Comment> comments = new ArrayList<>();
+
+        // Assuming you have a 'comments' table with columns 'id', 'publication_id', 'commenter_id', 'text', 'timestamp'
+        String query = "SELECT * FROM comments WHERE publication_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, publicationId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int commentId = resultSet.getInt("id");
+                    int commenterId = resultSet.getInt("commenter_id");
+                    String text = resultSet.getString("text");
+                    Timestamp timestamp = resultSet.getTimestamp("timestamp");
+
+                    // Assuming you have a constructor in your Comment class
+                    Comment comment = new Comment(commentId,publicationId, DatabaseConnector.getUserById(commenterId), text, timestamp);
+                    comments.add(comment);
+                }
+            }
+        }
+
+        return comments;
     }
 
     public Connection getConnection() {

@@ -5,6 +5,12 @@ public class Friendship {
     private int user1Id;
     private int user2Id;
     private String status;
+    public enum FriendshipStatus {
+        PENDING,
+        ACCEPTED,
+        REJECTED
+    }
+
 
     public int getFriendshipId() {
         return friendshipId;

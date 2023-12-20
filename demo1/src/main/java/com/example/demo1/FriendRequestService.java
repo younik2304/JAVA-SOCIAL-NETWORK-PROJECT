@@ -18,12 +18,12 @@ public class FriendRequestService {
 
     public static void acceptFriendRequest(int friendshipId, home_Controller homeController) {
         DatabaseConnector.updateFriendRequestStatus(friendshipId, ACCEPT_FRIEND_REQUEST_SQL);
-        homeController.displayFriendRequests();
+        //homeController.displayFriendRequests();
     }
 
     public static void rejectFriendRequest(int friendshipId, home_Controller homeController) {
         DatabaseConnector.updateFriendRequestStatus(friendshipId, REJECT_FRIEND_REQUEST_SQL);
-        homeController.displayFriendRequests();
+        //homeController.displayFriendRequests();
     }
 
 
