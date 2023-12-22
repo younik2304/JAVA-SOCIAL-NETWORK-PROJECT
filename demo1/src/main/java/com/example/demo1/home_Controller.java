@@ -1,28 +1,20 @@
 package com.example.demo1;
 
-import com.example.demo1.Friendship.FriendshipStatus;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.MouseButton;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class home_Controller {
@@ -54,8 +46,10 @@ public class home_Controller {
 
     @FXML
     private ImageView friendRequests;
+    @FXML
+    private ImageView messages;
 
-
+    // Create a ChatClient for the logged-in user
     public Button getAddPub() {
         return addPub;
     }
@@ -167,19 +161,20 @@ public class home_Controller {
             populateCenterWithUserPublications(UserSession.getLog_user());
         });
         friendRequests.setOnMouseClicked(event->{
-            //displayFriendRequests();
+            searchUsers(DatabaseConnector.getFriendRequests());
         });
         Button logout=new Button("log out ");
         footer.getChildren().add(logout);
         logout.setOnAction(e->{
             UserSession.logout(this);
         });
+
     }
 
-  /*  public void displayFriendRequests() {
+    public void searchUsers(List<FriendRequests> fr_reqs) {
         feed.getChildren().clear();
         feed.setPrefHeight(652.0);
-        AnchorPane search  = new AnchorPane();
+        AnchorPane search = new AnchorPane();
 
         // Create TextField dynamically
         TextField searchField = new TextField();
@@ -191,49 +186,123 @@ public class home_Controller {
         Button searchButton = new Button("Search");
         searchButton.setLayoutX(200.0);
         searchButton.setLayoutY(10.0);
-        search.getChildren().addAll(searchField,searchButton);
-        feed.getChildren().add(search);
-        searchButton.setOnAction(event -> displaysearchedUsers(searchField.getText()));
-        List<User> users = DatabaseConnector.getAllUsers();
-
-        for (User user : users) {
+        search.getChildren().addAll(searchField, searchButton);
+        feed.getChildren().addAll(search);
+        for (FriendRequests request : fr_reqs) {
             HBox userBox = new HBox();
-
-            // Check the friendship status
-            Friendship status = DatabaseConnector.getFriendshipStatus(loggedInUserId, user.getId());
-
-            // Create buttons based on the friendship status
-            Button actionButton;
-            if (status == FriendshipStatus.PENDING) {
-                // Display buttons for pending friend requests
-                Button acceptButton = new Button("Accept");
-                Button rejectButton = new Button("Reject");
-
-                // Set actions for accept and reject buttons
-                acceptButton.setOnAction(event -> acceptFriendRequest(status.getFriendshipId()));
-                rejectButton.setOnAction(event -> rejectFriendRequest(status.getFriendshipId()));
-
-                userBox.getChildren().addAll(createUserProfile(user), acceptButton, rejectButton);
-            } else if (status == FriendshipStatus.FRIEND) {
-                // If already friends, don't display anything
-                userBox.getChildren().add(createUserProfile(user));
-            } else {
-                // Display a button for sending a friend request
-                Button sendRequestButton = new Button("Send Request");
-                sendRequestButton.setOnAction(event -> sendFriendRequest(user.getId()));
-
-                userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName()+ " "+user.getLastName(),, sendRequestButton);
-            }
-
+            Button acceptButton = new Button("Accept");
+            Button rejectButton = new Button("Reject");
+            User sender = DatabaseConnector.getUserById(request.getSenderId());
+            // Set actions for accept and reject buttons
+            acceptButton.setOnAction(event -> {
+                try {
+                    DatabaseConnector.createFriend(request.getSenderId());
+                    DatabaseConnector.deleteFriendRequest(request.getRequestId());
+                    searchUsers(DatabaseConnector.getFriendRequests());
+                    sidebar.getChildren().clear();
+                    try {
+                        populateSidebarWithUsers();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            rejectButton.setOnAction(event -> {
+                try {
+                    DatabaseConnector.deleteFriendRequest(request.getRequestId());
+                    searchUsers(DatabaseConnector.getFriendRequests());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            userBox.getChildren().addAll(Test.createUserProfile(sender.getFirstName() + " " + sender.getLastName(), Test.returnUserProfileImage(sender.getProfilePicture()), 40), acceptButton, rejectButton);
             feed.getChildren().add(userBox);
         }
-    }
-*/
-    private void displaysearchedUsers(String searchField) {
-        List <User> users=DatabaseConnector.getUserByName(searchField);
-        //DatabaseConnector.get
-    }
 
+        searchButton.setOnAction(event -> {
+            String[]username =searchField.getText().split(" ");
+            if (username[0]==UserSession.getLog_user().getFirstName() && username[1]==UserSession.getLog_user().getLastName()) {
+                Test.showAlert("wrong input ","you just searched your name ");
+            }else {
+                User user = DatabaseConnector.getUserByName(searchField.getText());
+                if (user == null) {
+                    Test.showAlert("no user", "there are no users with the name :" + searchField.getText());
+                } else {
+                    List<User> friends = DatabaseConnector.getFriends();
+                    for (User friend : friends){
+                        System.out.println("friend"+ friend.getLastName());
+                    }
+                    displayFriendRequests(user, fr_reqs, friends);
+                }
+            }
+        });
+
+    }
+    public void displayFriendRequests(User user,List<FriendRequests>reqs,List<User>friends ){
+        feed.getChildren().clear();
+        feed.setPrefHeight(652.0);
+        HBox userBox=new HBox();
+        if (reqs.stream().anyMatch(request -> request.getSenderId() == user.getId() || request.getReceiverId() == user.getId())){
+
+            Button acceptButton = new Button("Accept");
+            Button rejectButton = new Button("Reject");
+            // Set actions for accept and reject buttons
+            acceptButton.setOnAction(event -> {
+                try {
+                    DatabaseConnector.createFriend(user.getId());
+                    DatabaseConnector.deleteFriendRequest(reqs.get(user.getId()).getRequestId());
+                    searchUsers(DatabaseConnector.getFriendRequests());
+                    sidebar.getChildren().clear();
+                    try {
+                        populateSidebarWithUsers();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            rejectButton.setOnAction(event -> {
+                try {
+
+                    DatabaseConnector.deleteFriendRequest(reqs.get(user.getId()).getRequestId());
+                    searchUsers(DatabaseConnector.getFriendRequests());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 40), acceptButton, rejectButton);
+        }else if (friends.stream().anyMatch(friend -> friend.getId() == user.getId())){
+            System.out.println("friend" +user.getFirstName());
+            Button unfriendButton = new Button("unfriend");
+            unfriendButton.setOnAction(event -> {
+                DatabaseConnector.removeFriend(user.getId());
+                searchUsers(DatabaseConnector.getFriendRequests());
+                sidebar.getChildren().clear();
+                try {
+                    populateSidebarWithUsers();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 40), unfriendButton);
+        }else {
+            System.out.println("not a friend "+user.getLastName());
+            Button sendrequest = new Button("send a request");
+            sendrequest.setOnAction(event -> {
+                try {
+                    DatabaseConnector.createFriendRequest(UserSession.getLog_user().getId(),user.getId());
+                    searchUsers(DatabaseConnector.getFriendRequests());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 40), sendrequest);
+        }
+        feed.getChildren().add(userBox);
+    }
     private void populateSidebarWithUsers() throws SQLException {
         // Fetch the list of users from the database
         List<User> userList = DatabaseConnector.getUsers();

@@ -35,6 +35,10 @@ public class User {
         numberOfUsers++;
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return id;
     }

@@ -42,7 +42,7 @@
                   <Image url="@../../../IMAGES/add-user-xxl.png" />
                </image>
             </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="messages" fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../IMAGES/chat.png" />
                      </image>
