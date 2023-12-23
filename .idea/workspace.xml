@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5307916-8ef9-4f6d-a684-8a0d2e2608e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friends.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequestService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friendship.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Comment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/PublicationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/PublicationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/UserSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/UserSession.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/publication.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/database.txt" afterDir="false" />
-    </list>
+    <list default="true" id="c5307916-8ef9-4f6d-a684-8a0d2e2608e5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +40,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "Merging main"
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="RecentsManager">

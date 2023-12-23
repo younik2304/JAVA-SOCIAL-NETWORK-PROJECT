@@ -218,7 +218,7 @@ public class home_Controller {
 
         searchButton.setOnAction(event -> {
             String[]username =searchField.getText().split(" ");
-            if (username[0]==UserSession.getLog_user().getFirstName() && username[1]==UserSession.getLog_user().getLastName()) {
+            if (username[0].equalsIgnoreCase(UserSession.getLog_user().getFirstName()) && username[1].equalsIgnoreCase(UserSession.getLog_user().getLastName())) {
                 Test.showAlert("wrong input ","you just searched your name ");
             }else {
                 User user = DatabaseConnector.getUserByName(searchField.getText());
