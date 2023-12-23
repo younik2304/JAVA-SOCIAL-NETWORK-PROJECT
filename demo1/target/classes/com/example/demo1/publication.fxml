@@ -26,7 +26,7 @@
       </StackPane>
       <HBox prefHeight="46.0" prefWidth="410.0">
          <children>
-            <Button fx:id="comments" mnemonicParsing="false" prefHeight="45.0" prefWidth="220.0" text="Comments " />
+            <Button fx:id="comments" mnemonicParsing="false" onMouseClicked="#showComments" prefHeight="45.0" prefWidth="220.0" text="Comments " />
             <Button fx:id="sharePublication" mnemonicParsing="false" onAction="#sharePublicationClicked" prefHeight="48.0" prefWidth="223.0" text="share" />
             <Button fx:id="deletePublication" mnemonicParsing="false" onAction="#deletePublicationClicked" prefHeight="46.0" prefWidth="33.0">
                <graphic>

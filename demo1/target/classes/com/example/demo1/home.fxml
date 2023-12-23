@@ -42,7 +42,7 @@
                   <Image url="@../../../IMAGES/add-user-xxl.png" />
                </image>
             </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="messages" fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../IMAGES/chat.png" />
                      </image>
@@ -95,6 +95,6 @@
       <VBox fx:id="sidebar" prefHeight="602.0" prefWidth="147.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <HBox prefHeight="46.0" prefWidth="988.0" style="-fx-background-color: #373130;" BorderPane.alignment="CENTER" />
+      <HBox fx:id="footer" prefHeight="46.0" prefWidth="988.0" style="-fx-background-color: #373130;" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

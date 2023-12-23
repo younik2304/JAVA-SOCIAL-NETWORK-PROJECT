@@ -23,3 +23,12 @@ CREATE TABLE friendships (
     user2_id INT,
     status VARCHAR(50) -- 'PENDING', 'ACCEPTED', 'REJECTED', etc.
 );
+CREATE TABLE comments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    publication_id INT,
+    commenter_id INT,
+    text TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (publication_id) REFERENCES publications(id),
+    FOREIGN KEY (commenter_id) REFERENCES users(id)
+);

@@ -4,8 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac560403-6328-4a44-a998-69f6a36d4704" name="Changes" comment="everything is fine  now with the signup and login work on button annd home feed">
+    <list default="true" id="c5307916-8ef9-4f6d-a684-8a0d2e2608e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friends.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Status.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/FriendRequestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Friendship.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/UserInfos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/PublicationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/PublicationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/UserSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/UserSession.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/publication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/database.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +51,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -39,23 +67,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "new-branch-name",
-    "last_directory_selection": "C:/Users/LENOVO/Documents/java_project/demo1/src/main/java/com/example/demo1",
-    "last_opened_file_path": "C:/Users/LENOVO/Desktop/sql/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.23678161",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+    "git-widget-placeholder": "Merging main"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\resources\IMAGES" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.demo1" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">

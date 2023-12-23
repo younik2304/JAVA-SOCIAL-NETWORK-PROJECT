@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +14,10 @@ import javafx.scene.layout.VBox;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 public class PublicationController {
@@ -86,11 +89,6 @@ public class PublicationController {
     }
 
     @FXML
-    private void addComment() {
-        // Implement logic to add a comment
-    }
-
-    @FXML
     private void sharePublicationClicked() {
         // Access the associated Publication and perform actions
         Publication associatedPublication = getPublication();
@@ -144,4 +142,82 @@ public class PublicationController {
             }
         }
     }
+    @FXML
+    private void showComments() {
+        // Access the associated Publication
+        Publication associatedPublication = getPublication();
+
+        if (associatedPublication != null) {
+            // Retrieve comments for the publication from the database
+            List<Comment> comments = null;
+            try {
+                comments = DatabaseConnector.getCommentsForPublication(associatedPublication.getId());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            // Create VBox to hold comments
+            VBox commentsBox = new VBox();
+            commentsBox.setSpacing(40);
+            // Display comments in the VBox
+            for (Comment comment : comments) {
+                HBox commentBox = new HBox();
+                VBox details=new VBox();
+                details.setSpacing(10);
+                // Create user profile for the commenter
+                User commenter = comment.getAuthor();
+                Image commenterImage = Test.returnUserProfileImage(commenter.getProfilePicture());
+                AnchorPane commenterProfile = Test.createUserProfile(commenter.getFirstName() + " " + commenter.getLastName(), commenterImage, 50);
+                //Test.addEventHandlers(commenterProfile, commenter);
+
+                // Create label for the comment text
+                Label commentLabel = new Label(comment.getText() + " - " + comment.getTimestamp());
+                commentLabel.setWrapText(true);
+                commentLabel.setStyle("-fx-text-fill: white;");
+                details.getChildren().addAll(commenterProfile, commentLabel);
+                commentBox.getChildren().add(details);
+                commentsBox.getChildren().add(commentBox);
+            }
+            commentsBox.setStyle("-fx-background-color: black;");
+            // Create TextField and Button for adding new comments
+            TextField newCommentField = new TextField();
+            Button addCommentButton = new Button("Add Comment");
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            addCommentButton.setOnAction(event -> {
+                String comment = newCommentField.getText();
+                try {
+                    DatabaseConnector.addComment(associatedPublication.getId(), UserSession.getLog_user().getId(), comment);
+
+                    // Schedule the closing of the alert on the JavaFX Application Thread
+                   alert.close();
+                   Test.showAlert("comment added ","the comments you added has been succesfully sent ");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            commentsBox.getChildren().addAll(newCommentField, addCommentButton);
+
+            // Wrap the commentsBox in a ScrollPane
+            ScrollPane scrollPane = new ScrollPane(commentsBox);
+            scrollPane.setPrefViewportHeight(300);
+            scrollPane.setPrefViewportWidth(300);
+            scrollPane.setFitToWidth(true);
+
+            // Create and show an Alert with the ScrollPane as content
+            VBox scroll=new VBox(scrollPane,newCommentField,addCommentButton);
+            alert.setTitle("Comments");
+            alert.getDialogPane().setContent(scroll);
+
+            // Add a close button to the Alert
+            ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(closeButton);
+
+            // Show the Alert
+            alert.showAndWait();
+        }
+    }
+
+
+
 }
