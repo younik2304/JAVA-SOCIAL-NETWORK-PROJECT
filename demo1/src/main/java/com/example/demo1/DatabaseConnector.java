@@ -143,6 +143,55 @@ public class DatabaseConnector {
         }
     }
 
+    public static List<Message> getMessagesBetweenUsers(int yourUserId, int otherUserId) {
+        List<Message> messages = new ArrayList<>();
+
+        String query = "SELECT * FROM messages WHERE (sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?) ORDER BY timestamp";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, yourUserId);
+            preparedStatement.setInt(2, otherUserId);
+            preparedStatement.setInt(3, otherUserId);
+            preparedStatement.setInt(4, yourUserId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int messageId = resultSet.getInt("id");
+                    int senderId = resultSet.getInt("sender_id");
+                    int recipientId = resultSet.getInt("recipient_id");
+                    String messageText = resultSet.getString("message_text");
+                    Timestamp timestamp = resultSet.getTimestamp("timestamp");
+
+                    User sender = getUserById(senderId);
+                    User recipient = getUserById(recipientId);
+
+                    Message message = new Message(messageId, sender, recipient, messageText, timestamp);
+                    messages.add(message);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle exceptions appropriately based on your application's requirements
+        }
+
+        return messages;
+    }
+
+    public static boolean saveMessageToDatabase(int yourUserId, int otherUserId, String messageText) {
+        String query = "INSERT INTO messages (sender_id, recipient_id, message_text, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, yourUserId);
+            preparedStatement.setInt(2, otherUserId);
+            preparedStatement.setString(3, messageText);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle exceptions appropriately based on your application's requirements
+            return false;
+        }
+    }
+
 
     public Connection getConnection() {
         return connection;

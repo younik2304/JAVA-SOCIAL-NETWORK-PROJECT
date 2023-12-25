@@ -193,5 +193,26 @@ public class Test {
         stage.setScene(scene);
     }
 
+    public static void addEventHandlerstochat(AnchorPane profile, User user) {
+        // Mouse click event handler
 
+        // Hover event handlers
+        profile.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                // Handle mouse enter (hover)
+                // Add hover effects or actions here
+                profile.setStyle("-fx-background-color: lightgray;"); // Example: Change background color on hover
+            }
+        });
+
+        profile.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                // Handle mouse exit (hover)
+                // Remove hover effects or actions here
+                profile.setStyle("-fx-background-color: transparent;"); // Example: Reset background color on exit
+            }
+        });
+    }
 }

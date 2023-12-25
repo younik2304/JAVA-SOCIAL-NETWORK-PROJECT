@@ -44,6 +44,7 @@ public class Login_Controller {
            ;
             if (login(email, password)) {
                 try {
+
                     SceneSwitcher.switchScene("home.fxml",Test.getStage(loginButton),"home feed");
 
                 } catch (Exception e) {

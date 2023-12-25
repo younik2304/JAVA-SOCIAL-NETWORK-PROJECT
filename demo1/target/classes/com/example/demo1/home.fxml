@@ -75,10 +75,10 @@
          <!-- New AnchorPane for Manual Publication Entry -->
 
          <!-- Existing ScrollPane for Publications -->
-         <ScrollPane fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="632.0" prefHeight="632.0" prefWidth="731.0">
+         <ScrollPane fx:id="scroll" fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="632.0" maxWidth="731.0" prefHeight="632.0" prefWidth="731.0">
             <content>
                <!-- Existing VBox for Publications -->
-               <VBox fx:id="feed" prefHeight="503.0" prefWidth="835.0" spacing="30" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+               <VBox fx:id="feed" maxWidth="800.0" prefHeight="503.0" prefWidth="835.0" spacing="30" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
                      <padding>
                         <Insets left="100.0" />
                      </padding>

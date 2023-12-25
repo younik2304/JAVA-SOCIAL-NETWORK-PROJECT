@@ -1,8 +1,13 @@
 package com.example.demo1;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -13,43 +18,58 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class home_Controller {
 
     @FXML
-    private HBox navbar;
+    public HBox navbar;
 
     @FXML
-    private VBox sidebar;
+    public VBox sidebar;
 
     @FXML
-    private VBox feed;
+    public VBox feed;
+    @FXML
+    public ScrollPane scroll;
 
 
     @FXML
-    private VBox center;
+    public VBox center;
 
     @FXML
-    private ImageView homeIcon;
+    public ImageView homeIcon;
     @FXML
-    private ImageView userIcon;
+    public ImageView userIcon;
     @FXML
-    private Button addPub;
+    public Button addPub;
 
     @FXML
-    private Button userInfos;
+    public Button userInfos;
     @FXML
-    private HBox footer ;
+    public HBox footer ;
 
     @FXML
-    private ImageView friendRequests;
+    public ImageView friendRequests;
     @FXML
-    private ImageView messages;
+    public ImageView messages;
+    private User currentChatUser;
+    private Client activeClient;
+
+    public VBox getSidebar() {
+        return sidebar;
+    }
+    private static final Logger logger = LoggerFactory.getLogger(home_Controller.class);
 
     // Create a ChatClient for the logged-in user
     public Button getAddPub() {
@@ -164,6 +184,15 @@ public class home_Controller {
             UserSession.logout(this);
         });
 
+        messages.setOnMouseClicked(e-> {
+            int serverPort = UserSession.getLog_user().getId()+1000; // Choose a suitable port number
+            Server server = new Server(serverPort,this);
+            Thread serverThread = new Thread(server);
+            serverThread.start();
+            feed.getChildren().clear();
+            populateSidebarWithChatUsers();
+        });
+
     }
 
     public void searchUsers(List<FriendRequests> fr_reqs) {
@@ -212,6 +241,9 @@ public class home_Controller {
                     throw new RuntimeException(e);
                 }
             });
+            acceptButton.setLayoutY(10);
+            rejectButton.setLayoutY(10);
+
             userBox.getChildren().addAll(Test.createUserProfile(sender.getFirstName() + " " + sender.getLastName(), Test.returnUserProfileImage(sender.getProfilePicture()), 40), acceptButton, rejectButton);
             feed.getChildren().add(userBox);
         }
@@ -240,7 +272,7 @@ public class home_Controller {
         feed.getChildren().clear();
         feed.setPrefHeight(652.0);
         HBox userBox=new HBox();
-        if (reqs.stream().anyMatch(request -> request.getSenderId() == user.getId() || request.getReceiverId() == user.getId())){
+        if (reqs.stream().anyMatch(request ->  request.getReceiverId() == user.getId())){
 
             Button acceptButton = new Button("Accept");
             Button rejectButton = new Button("Reject");
@@ -271,7 +303,6 @@ public class home_Controller {
             });
             userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 40), acceptButton, rejectButton);
         }else if (friends.stream().anyMatch(friend -> friend.getId() == user.getId())){
-            System.out.println("friend" +user.getFirstName());
             Button unfriendButton = new Button("unfriend");
             unfriendButton.setOnAction(event -> {
                 DatabaseConnector.removeFriend(user.getId());
@@ -285,7 +316,6 @@ public class home_Controller {
             });
             userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 40), unfriendButton);
         }else {
-            System.out.println("not a friend "+user.getLastName());
             Button sendrequest = new Button("send a request");
             sendrequest.setOnAction(event -> {
                 try {
@@ -297,6 +327,8 @@ public class home_Controller {
             });
             userBox.getChildren().addAll(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 40), sendrequest);
         }
+        userBox.setSpacing(20);
+
         feed.getChildren().add(userBox);
     }
     private void populateSidebarWithUsers() throws SQLException {
@@ -320,7 +352,40 @@ public class home_Controller {
         // Add the VBox to the sidebar
         //sidebar.getChildren().add(userProfilesVBox);
     }
+    private void populateSidebarWithChatUsers() {
+        // Fetch the list of users from the database
+        List<User> userList = null;
+        try {
+            userList = DatabaseConnector.getUsers();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        sidebar.getChildren().clear();
 
+        // Create a VBox to hold user profiles in the sidebar
+        //VBox userProfilesVBox = new VBox(User.getNumberOfUsers()); // Adjust the spacing between user profiles
+
+        // Populate the VBox with user profiles
+        for (User user : userList) {
+            Image userImage = Test.returnUserProfileImage(user.getProfilePicture());
+            AnchorPane userProfile = Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), userImage, 50);
+
+            // Pass the user to addEventHandlers
+            Test.addEventHandlerstochat(userProfile,user);
+            userProfile.setOnMouseClicked(e->{
+                connectToServer(UserSession.getLog_user().getId(), user.getId());
+                chatBox(user);
+                //String originalStyle = userBox.getStyle();
+                feed.setStyle("-fx-background-color: #d3d3d3;");
+            });
+
+            sidebar.getChildren().add(userProfile);
+        }
+
+
+        // Add the VBox to the sidebar
+        //sidebar.getChildren().add(userProfilesVBox);
+    }
 
 
     public  void populateFeedWithPublications() {
@@ -396,6 +461,150 @@ public class home_Controller {
 
     public void refreshFeed() {
         populateFeedWithPublications();
+    }
+    private void chatBox(User user) {
+        currentChatUser = user;
+        int yourUserId = UserSession.getLog_user().getId();
+        int otherUserId = user.getId();
+        List<Message> messages = DatabaseConnector.getMessagesBetweenUsers(yourUserId, otherUserId);
+
+        // Clear the chatVbox to prepare for new messages
+        feed.getChildren().clear();
+        AnchorPane userBox = Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 50);
+        feed.getChildren().add(userBox);
+
+        for (Message message : messages) {
+            if (message.getSender().getId() == yourUserId) {
+                // Message sent by the logged-in user
+                displaySentMessage(message);
+            } else {
+                // Message received from the other user
+                displayReceivedMessage(message);
+            }
+        }
+
+        TextField messagefield = new TextField();
+        Button send = new Button("send");
+
+        // Set maximum width for the message containers
+        double maxWidth = 550.0; // Adjust this value as needed
+        feed.getChildren().forEach(node -> {
+            if (node instanceof HBox) {
+                ((HBox) node).setMaxWidth(maxWidth);
+            }
+        });
+
+        // Adjust the positioning of TextField and Button
+        HBox inputBox = new HBox(messagefield, send);
+        inputBox.setSpacing(10); // Adjust spacing as needed
+        inputBox.setAlignment(Pos.CENTER);
+        footer.getChildren().add(inputBox);
+
+        send.setOnMouseClicked(e -> {
+            sendMessage(messagefield.getText());
+            messagefield.clear();
+            Platform.runLater(() -> {
+                scroll.setVvalue(2.0);
+            });
+        });
+    }
+
+    public void displaySentMessage(Message message) {
+        HBox sentMessage = createMessageContainer(message.getMessageText(), message.getTimestamp(), true);
+        Platform.runLater(() -> {
+            feed.getChildren().add(sentMessage);
+            adjustMessageAppearance();
+            Platform.runLater(() -> {
+                scroll.setVvalue(2.0);
+            });
+        });
+    }
+
+    public void displayReceivedMessage(Message message) {
+        HBox receivedMessage = createMessageContainer(message.getMessageText(), message.getTimestamp(), false);
+        Platform.runLater(() -> {
+            feed.getChildren().add(receivedMessage);
+            adjustMessageAppearance();
+            Platform.runLater(() -> {
+                scroll.setVvalue(2.0);
+            });
+        });
+    }
+    private void adjustMessageAppearance() {
+        // Adjust the appearance of messages in the feed
+        double maxWidth = 600.0; // Adjust this value as needed
+        feed.getChildren().forEach(node -> {
+            if (node instanceof HBox) {
+                ((HBox) node).setMaxWidth(maxWidth);
+            }
+        });
+    }
+    private static HBox createMessageContainer(String content, Timestamp timestamp, boolean sentByCurrentUser) {
+        HBox messageBox = new HBox();
+        Label messageLabel = new Label(content);
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM");
+        String formattedDateTime = localDateTime.format(formatter);
+        Label timestampLabel = new Label(formattedDateTime) ; // Use the timestamp
+
+        messageLabel.setWrapText(true);
+        messageLabel.setPadding(new Insets(10)); // Add padding to the message label
+
+        // Customize the appearance of the message box and labels based on sender
+        if (sentByCurrentUser) {
+            messageBox.setAlignment(Pos.CENTER_RIGHT);
+            messageLabel.setTranslateX(-5);
+            messageLabel.setStyle("-fx-background-color: #DCF8C6; -fx-background-radius: 10; -fx-padding: 8px;");
+            timestampLabel.setStyle("-fx-font-size:8px; -fx-font-weight: bold; -fx-text-fill: #999999; -fx-padding: 2px 4px; -fx-background-color: #f2f2f2; -fx-background-radius: 4px;");
+        } else {
+            messageBox.setAlignment(Pos.CENTER_LEFT);
+            messageLabel.setTranslateX(5);
+            messageLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-padding: 8px;");
+            timestampLabel.setStyle("-fx-font-size: 8px; -fx-font-weight: bold; -fx-text-fill: #999999; -fx-padding: 2px 4px; -fx-background-color: #f2f2f2; -fx-background-radius: 4px;");
+        }
+
+        // Add message content and timestamp labels to the messageBox
+        VBox messageContent = new VBox(messageLabel, timestampLabel);
+        messageContent.setSpacing(0); // Adjust the spacing between message content and timestamp
+        messageBox.getChildren().add(messageContent);
+
+        return messageBox;
+    }
+    private void connectToServer(int yourUserId, int otherUserId) {
+        if (activeClient != null) {
+            activeClient.closeClient();
+        }
+        try {
+            Client client = new Client("localhost", yourUserId + 1000, this);
+            Thread clientThread = new Thread(client);
+            clientThread.start();
+            activeClient = client;
+            System.out.println("Connected to server successfully.");
+            logger.debug("connected to server successfully ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error connecting to server: " + e.getMessage());
+            logger.error("eroor");
+        }
+    }
+    private void sendMessage(String message) {
+        // Get the IDs of the sender and receiver
+        int yourUserId = UserSession.getLog_user().getId();
+        int otherUserId = currentChatUser.getId();
+
+        // Save the message to the database
+        boolean messageSent = DatabaseConnector.saveMessageToDatabase(yourUserId, otherUserId, message);
+
+        if (currentChatUser!=null) {
+
+            Message msg=new Message(message,Timestamp.valueOf(LocalDateTime.now()));
+            displaySentMessage(msg);
+            if (activeClient != null  ) {
+                activeClient.sendMessage(message);
+            }}
+        // Create unique ports for each user pair or utilize a different strategy to differentiate communication
+
     }
 }
 
