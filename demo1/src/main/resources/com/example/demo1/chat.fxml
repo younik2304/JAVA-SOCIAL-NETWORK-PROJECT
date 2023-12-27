@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="chat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ChatController">
+   <children>
+      <HBox fx:id="userprofile" alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="512.0" style="-fx-background-color: grey;" />
+      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" prefHeight="450.0">
+         <content>
+            <VBox />
+         </content>
+      </ScrollPane>
+      <HBox alignment="CENTER" prefHeight="54.0" prefWidth="603.0" spacing="30.0" style="-fx-background-color: grey;">
+         <children>
+            <TextField fx:id="message_field" prefHeight="38.0" prefWidth="280.0" promptText="type message " >
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="sendMessage" mnemonicParsing="false" prefHeight="36.0" prefWidth="102.0" text="sendMessage" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

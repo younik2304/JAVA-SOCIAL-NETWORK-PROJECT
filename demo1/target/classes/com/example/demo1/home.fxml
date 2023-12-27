@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 
-<BorderPane maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
+<BorderPane fx:id="border" maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
    <top>
             <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="994.0" style="-fx-background-color: #373130;">
                <children>

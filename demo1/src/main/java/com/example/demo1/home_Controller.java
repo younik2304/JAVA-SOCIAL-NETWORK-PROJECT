@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class home_Controller {
+    @FXML
+    public BorderPane border;
 
     @FXML
     public HBox navbar;
@@ -63,8 +66,13 @@ public class home_Controller {
     public ImageView friendRequests;
     @FXML
     public ImageView messages;
-    private User currentChatUser;
-    private Client activeClient;
+    public User currentChatUser;
+    public Client activeClient;
+    private ChatController chatController; // Add this field
+
+    public void setChatController(ChatController chatController) {
+        this.chatController = chatController;
+    }
 
     public VBox getSidebar() {
         return sidebar;
@@ -374,7 +382,8 @@ public class home_Controller {
             Test.addEventHandlerstochat(userProfile,user);
             userProfile.setOnMouseClicked(e->{
                 connectToServer(UserSession.getLog_user().getId(), user.getId());
-                chatBox(user);
+                loadChatContent(user,this);
+
                 //String originalStyle = userBox.getStyle();
                 feed.setStyle("-fx-background-color: #d3d3d3;");
             });
@@ -462,116 +471,8 @@ public class home_Controller {
     public void refreshFeed() {
         populateFeedWithPublications();
     }
-    private void chatBox(User user) {
-        currentChatUser = user;
-        int yourUserId = UserSession.getLog_user().getId();
-        int otherUserId = user.getId();
-        List<Message> messages = DatabaseConnector.getMessagesBetweenUsers(yourUserId, otherUserId);
 
-        // Clear the chatVbox to prepare for new messages
-        feed.getChildren().clear();
-        AnchorPane userBox = Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 50);
-        feed.getChildren().add(userBox);
-
-        for (Message message : messages) {
-            if (message.getSender().getId() == yourUserId) {
-                // Message sent by the logged-in user
-                displaySentMessage(message);
-            } else {
-                // Message received from the other user
-                displayReceivedMessage(message);
-            }
-        }
-
-        TextField messagefield = new TextField();
-        Button send = new Button("send");
-
-        // Set maximum width for the message containers
-        double maxWidth = 550.0; // Adjust this value as needed
-        feed.getChildren().forEach(node -> {
-            if (node instanceof HBox) {
-                ((HBox) node).setMaxWidth(maxWidth);
-            }
-        });
-
-        // Adjust the positioning of TextField and Button
-        HBox inputBox = new HBox(messagefield, send);
-        inputBox.setSpacing(10); // Adjust spacing as needed
-        inputBox.setAlignment(Pos.CENTER);
-        footer.getChildren().add(inputBox);
-
-        send.setOnMouseClicked(e -> {
-            sendMessage(messagefield.getText());
-            messagefield.clear();
-            Platform.runLater(() -> {
-                scroll.setVvalue(2.0);
-            });
-        });
-    }
-
-    public void displaySentMessage(Message message) {
-        HBox sentMessage = createMessageContainer(message.getMessageText(), message.getTimestamp(), true);
-        Platform.runLater(() -> {
-            feed.getChildren().add(sentMessage);
-            adjustMessageAppearance();
-            Platform.runLater(() -> {
-                scroll.setVvalue(2.0);
-            });
-        });
-    }
-
-    public void displayReceivedMessage(Message message) {
-        HBox receivedMessage = createMessageContainer(message.getMessageText(), message.getTimestamp(), false);
-        Platform.runLater(() -> {
-            feed.getChildren().add(receivedMessage);
-            adjustMessageAppearance();
-            Platform.runLater(() -> {
-                scroll.setVvalue(2.0);
-            });
-        });
-    }
-    private void adjustMessageAppearance() {
-        // Adjust the appearance of messages in the feed
-        double maxWidth = 600.0; // Adjust this value as needed
-        feed.getChildren().forEach(node -> {
-            if (node instanceof HBox) {
-                ((HBox) node).setMaxWidth(maxWidth);
-            }
-        });
-    }
-    private static HBox createMessageContainer(String content, Timestamp timestamp, boolean sentByCurrentUser) {
-        HBox messageBox = new HBox();
-        Label messageLabel = new Label(content);
-        LocalDateTime localDateTime = timestamp.toLocalDateTime();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM");
-        String formattedDateTime = localDateTime.format(formatter);
-        Label timestampLabel = new Label(formattedDateTime) ; // Use the timestamp
-
-        messageLabel.setWrapText(true);
-        messageLabel.setPadding(new Insets(10)); // Add padding to the message label
-
-        // Customize the appearance of the message box and labels based on sender
-        if (sentByCurrentUser) {
-            messageBox.setAlignment(Pos.CENTER_RIGHT);
-            messageLabel.setTranslateX(-5);
-            messageLabel.setStyle("-fx-background-color: #DCF8C6; -fx-background-radius: 10; -fx-padding: 8px;");
-            timestampLabel.setStyle("-fx-font-size:8px; -fx-font-weight: bold; -fx-text-fill: #999999; -fx-padding: 2px 4px; -fx-background-color: #f2f2f2; -fx-background-radius: 4px;");
-        } else {
-            messageBox.setAlignment(Pos.CENTER_LEFT);
-            messageLabel.setTranslateX(5);
-            messageLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-padding: 8px;");
-            timestampLabel.setStyle("-fx-font-size: 8px; -fx-font-weight: bold; -fx-text-fill: #999999; -fx-padding: 2px 4px; -fx-background-color: #f2f2f2; -fx-background-radius: 4px;");
-        }
-
-        // Add message content and timestamp labels to the messageBox
-        VBox messageContent = new VBox(messageLabel, timestampLabel);
-        messageContent.setSpacing(0); // Adjust the spacing between message content and timestamp
-        messageBox.getChildren().add(messageContent);
-
-        return messageBox;
-    }
-    private void connectToServer(int yourUserId, int otherUserId) {
+     private void connectToServer(int yourUserId, int otherUserId) {
         if (activeClient != null) {
             activeClient.closeClient();
         }
@@ -588,24 +489,23 @@ public class home_Controller {
             logger.error("eroor");
         }
     }
-    private void sendMessage(String message) {
-        // Get the IDs of the sender and receiver
-        int yourUserId = UserSession.getLog_user().getId();
-        int otherUserId = currentChatUser.getId();
 
-        // Save the message to the database
-        boolean messageSent = DatabaseConnector.saveMessageToDatabase(yourUserId, otherUserId, message);
+    private void loadChatContent(User user, home_Controller home) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("chat.fxml"));
+            VBox chatContent = loader.load();  // Load FXML file first
+            chatController = loader.getController();  // Access the controller after loading
 
-        if (currentChatUser!=null) {
+            chatContent=chatController.setChat(user, this);
+            border.setCenter(chatContent);
 
-            Message msg=new Message(message,Timestamp.valueOf(LocalDateTime.now()));
-            displaySentMessage(msg);
-            if (activeClient != null  ) {
-                activeClient.sendMessage(message);
-            }}
-        // Create unique ports for each user pair or utilize a different strategy to differentiate communication
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error loading ChatController content: " + e.getMessage());
+        }
     }
+
 }
 
 
