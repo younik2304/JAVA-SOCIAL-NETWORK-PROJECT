@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5307916-8ef9-4f6d-a684-8a0d2e2608e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/ChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/chat.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,17 +48,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "main",
-    "last_directory_selection": "C:/Users/LENOVO/Documents/java_project/demo1/src/main/java/com/example/demo1",
-    "last_opened_file_path": "C:/Users/LENOVO/Desktop/sql/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.23678161",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/LENOVO/Documents/java_project/demo1/src/main/java/com/example/demo1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/Desktop/sql/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.23678161&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\resources\com\example\demo1" />
@@ -67,7 +69,7 @@
       <recent name="com.example.demo1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.DatabaseTest">
     <configuration name="CloudinaryImageUtility" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo1.CloudinaryImageUtility" />
       <module name="demo1" />
@@ -114,8 +116,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.DatabaseTest" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.CloudinaryImageUtility" />
       </list>
     </recent_temporary>
@@ -144,6 +146,16 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="everything is fine  now with the signup and login work on button annd home feed" />
     <option name="LAST_COMMIT_MESSAGE" value="everything is fine  now with the signup and login work on button annd home feed" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

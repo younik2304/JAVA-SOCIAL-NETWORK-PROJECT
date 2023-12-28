@@ -29,6 +29,8 @@ public class ChatController {
 
     @FXML
     private VBox chat;
+    @FXML
+    private VBox chatmessages;
 
     @FXML
     private TextField message_field;
@@ -46,7 +48,7 @@ public class ChatController {
 
 
     public VBox setChat(User user, home_Controller home) {
-        VBox chatContent = new VBox();  // Create a VBox to hold the chat content
+        chatmessages.getChildren().clear();  // Create a VBox to hold the chat content
 
         home.currentChatUser = user;
         int yourUserId = UserSession.getLog_user().getId();
@@ -58,15 +60,16 @@ public class ChatController {
         userprofile.getChildren().add(Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), Test.returnUserProfileImage(user.getProfilePicture()), 50));
         for (Message message : messages) {
             if (message.getSender().getId() == yourUserId) {
+                System.out.println("sender ="+message.getSender().getId());
                 // Message sent by the logged-in user
-                displaySentMessage(message, chatContent);
+                displaySentMessage(message);
             } else {
                 // Message received from the other user
-                displayReceivedMessage(message, chatContent);
+                displayReceivedMessage(message);
             }
         }
         sendMessage.setOnMouseClicked(e -> {
-            sendMessage(message_field.getText(), home, chatContent);
+            sendMessage(message_field.getText(), home,user);
             message_field.clear();
             Platform.runLater(() -> {
                 scroll.setVvalue(1.0);
@@ -74,15 +77,15 @@ public class ChatController {
         });
 
         // Clear the chatContent before adding scroll
-        scroll.setContent(chatContent);
+        scroll.setContent(chatmessages);
 
         return chat;  // Return the VBox containing the chat content
     }
 
-    public void displaySentMessage(Message message, VBox chatContent) {
+    public void displaySentMessage(Message message) {
         HBox sentMessage = createMessageContainer(message.getMessageText(), message.getTimestamp(), true);
         Platform.runLater(() -> {
-            chatContent.getChildren().add(sentMessage);
+            chatmessages.getChildren().add(sentMessage);
             adjustMessageAppearance();
             Platform.runLater(() -> {
                 scroll.setVvalue(1.0);
@@ -91,10 +94,10 @@ public class ChatController {
           // Add the sent message to the VBox
     }
 
-    public void displayReceivedMessage(Message message, VBox chatContent) {
+    public void displayReceivedMessage(Message message) {
         HBox receivedMessage = createMessageContainer(message.getMessageText(), message.getTimestamp(), false);
         Platform.runLater(() -> {
-            chatContent.getChildren().add(receivedMessage);  // Add the received message to the VBox
+            chatmessages.getChildren().add(receivedMessage);  // Add the received message to the VBox
             adjustMessageAppearance();
             Platform.runLater(() -> {
                 scroll.setVvalue(1.0);
@@ -103,7 +106,7 @@ public class ChatController {
 
     }
 
-    private void sendMessage(String message, home_Controller home, VBox chatContent) {
+    private void sendMessage(String message, home_Controller home,User receiver) {
         // Get the IDs of the sender and receiver
         int yourUserId = UserSession.getLog_user().getId();
         int otherUserId = home.currentChatUser.getId();
@@ -114,10 +117,9 @@ public class ChatController {
         if (home.currentChatUser != null) {
 
             Message msg = new Message(message, Timestamp.valueOf(LocalDateTime.now()));
-            displaySentMessage(msg, chatContent);
+            displaySentMessage(msg);
             if (home.activeClient != null) {
                 home.activeClient.sendMessage(message);
-
             }
         }
         // Create unique ports for each user pair or utilize a different strategy to differentiate communication

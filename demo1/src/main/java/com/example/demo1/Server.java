@@ -104,7 +104,7 @@ public class Server implements Runnable {
                     if (in.available() > 0) {
                         String data = in.readUTF();
                         System.out.println("run :"+data);
-                        //sendToOtherClients(data);
+                        sendToOtherClients(data);
                     }}
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -113,28 +113,30 @@ public class Server implements Runnable {
             }
         }
         private void sendToOtherClients(String data) {
-            // Iterate through 'clients' list and send 'data' to other clients
-            for (ClientHandler client : clients) {
-                String [] msg=data.split(" ");
-                String[] slicedArray = Arrays.copyOfRange(msg, 0, msg.length - 1);
+            String[] msg = data.split(" ");
+            String[] slicedArray = Arrays.copyOfRange(msg, 0, msg.length - 1);
 
-                StringBuilder concatenatedString = new StringBuilder();
-                for (String element : slicedArray) {
-                    concatenatedString.append(element).append(" ");
-                }
-                String result = concatenatedString.toString().trim();
-                System.out.println( Client.getPort()+" == "+Integer.parseInt(msg[msg.length-1]));
-                if (client.getPort()==this.getPort() && (Client.getPort()-1000)==Integer.parseInt(msg[msg.length-1])){
-                    Message messi=new Message(result, Timestamp.valueOf(LocalDateTime.now()));
-                    System.out.println("tiiiii");
+            StringBuilder concatenatedString = new StringBuilder();
+            for (String element : slicedArray) {
+                concatenatedString.append(element).append(" ");
+            }
+            String result = concatenatedString.toString().trim();
+            for (ClientHandler client : clients) {
+
+
+
+                if (client.getPort()==this.getPort() && (Client.getPort()-1000)==Integer.parseInt(msg[msg.length-1])) {
+                    Message receivedmes = new Message(result, Timestamp.valueOf(LocalDateTime.now()));
                     Platform.runLater(() -> {
                         // Update the UI components here
-                        //homecontroller.displayReceivedMessage(messi);
+                        ChatController chatController = homecontroller.chatController;
+                        chatController.displayReceivedMessage(receivedmes);
                     });
-
-                }
+               }
             }
         }
+
+
 
         public void closeClient() {
             try {
@@ -153,7 +155,7 @@ public class Server implements Runnable {
         }
 
         public int getPort() {
-            return  socket.getPort();
+            return  port;
         }
 
         public Object getSocket() {

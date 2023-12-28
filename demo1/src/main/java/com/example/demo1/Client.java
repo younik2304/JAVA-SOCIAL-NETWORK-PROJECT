@@ -25,15 +25,12 @@ public class Client implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("Connecting to server...");
-            System.out.println("Server Host: " + host);
-            System.out.println("Server Port: " + port);
+            System.out.println("client Host: " + host);
+            System.out.println("client Port: " + port);
             client = new Socket("localhost", port);
             DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-            String data2;
             while (true) {
                 if (in.available() > 0) {
                     String data = in.readUTF();
@@ -42,7 +39,7 @@ public class Client implements Runnable {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e+" somethig is wrong "+port);
         } finally {
 
         }
@@ -51,16 +48,16 @@ public class Client implements Runnable {
         try {
             if (client != null) {
                 DataOutputStream out = new DataOutputStream(client.getOutputStream());
-                out.writeUTF(message+" "+UserSession.getLog_user().getId());
+                out.writeUTF(message + " " +UserSession.getLog_user().getId());
                 out.flush();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally {
-
+        } finally {
+            // Any cleanup code if needed
         }
-
     }
+
 
     public  void closeClient() {
         try {

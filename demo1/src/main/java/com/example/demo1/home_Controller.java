@@ -68,7 +68,7 @@ public class home_Controller {
     public ImageView messages;
     public User currentChatUser;
     public Client activeClient;
-    private ChatController chatController; // Add this field
+    public  ChatController chatController; // Add this field
 
     public void setChatController(ChatController chatController) {
         this.chatController = chatController;
@@ -381,7 +381,7 @@ public class home_Controller {
             // Pass the user to addEventHandlers
             Test.addEventHandlerstochat(userProfile,user);
             userProfile.setOnMouseClicked(e->{
-                connectToServer(UserSession.getLog_user().getId(), user.getId());
+                connectToServer(user.getId());
                 loadChatContent(user,this);
 
                 //String originalStyle = userBox.getStyle();
@@ -472,16 +472,16 @@ public class home_Controller {
         populateFeedWithPublications();
     }
 
-     private void connectToServer(int yourUserId, int otherUserId) {
+     private void connectToServer(int UserId) {
         if (activeClient != null) {
             activeClient.closeClient();
         }
         try {
-            Client client = new Client("localhost", yourUserId + 1000, this);
+            Client client = new Client("localhost", UserId + 1000, this);
             Thread clientThread = new Thread(client);
             clientThread.start();
             activeClient = client;
-            System.out.println("Connected to server successfully.");
+            System.out.println("active client is "+UserId);
             logger.debug("connected to server successfully ");
         } catch (Exception e) {
             e.printStackTrace();
