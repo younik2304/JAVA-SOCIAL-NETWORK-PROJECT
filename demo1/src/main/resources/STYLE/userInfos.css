@@ -1,0 +1,22 @@
+/* userinfos.css */
+
+.hbox-background {
+    -fx-background-color: #EDEDED; /* Light background color for the HBox */
+}
+
+.vbox-text {
+    -fx-font-size: 18;
+    -fx-text-fill: #333333; /* Dark text color */
+}
+
+.label-text {
+    -fx-font-size: 20;
+    -fx-text-fill: #0066cc; /* Blue text color */
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+    -fx-border-color: #0066cc; /* Blue border color */
+    -fx-border-width: 3;
+    -fx-border-radius: 10;
+}

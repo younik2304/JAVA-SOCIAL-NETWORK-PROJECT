@@ -5,15 +5,92 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5307916-8ef9-4f6d-a684-8a0d2e2608e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/IMAGES/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/Publication.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/ajoutPub.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/chatcss.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/userInfos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/DatabaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/PublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/SceneSwitcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/SceneSwitcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/addPubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/addPubController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/home_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/signup_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/java/com/example/demo1/signup_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/12.png.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/2.png.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/PUBLICATION_IMAGES/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/home_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/home_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/login_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/login_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/signup_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/STYLE/signup_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/UserProfiles/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/UserProfiles/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/UserProfiles/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/UserProfiles/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/UserProfiles/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/Signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/Signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/UserInfos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/UserInfos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/ajouterpub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/ajouterpub.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/com/example/demo1/publication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/src/main/resources/database.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/12.png.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/2.png.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/PUBLICATION_IMAGES/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/STYLE/home_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/STYLE/home_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/STYLE/login_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/STYLE/login_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/STYLE/signup_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/STYLE/signup_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/UserProfiles/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/UserProfiles/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/UserProfiles/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/UserProfiles/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseConnector.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/DatabaseTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/SceneSwitcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/SceneSwitcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/Signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/addPubController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/addPubController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/ajouterpub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/ajouterpub.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/home_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/signup_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/com/example/demo1/signup_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/target/classes/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/target/classes/database.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,15 +138,15 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\resources\com\example\demo1" />
-      <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\java\com\example\demo1" />
       <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\resources\IMAGES" />
+      <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\java\com\example\demo1" />
+      <recent name="C:\Users\LENOVO\Documents\java_project\demo1\src\main\resources\com\example\demo1" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.demo1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DatabaseTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="CloudinaryImageUtility" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo1.CloudinaryImageUtility" />
       <module name="demo1" />
@@ -116,8 +193,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DatabaseTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.DatabaseTest" />
         <item itemvalue="Application.CloudinaryImageUtility" />
       </list>
     </recent_temporary>

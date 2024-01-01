@@ -1,0 +1,45 @@
+/* Apply styles to the entire VBox */
+VBox {
+    -fx-spacing: 10;
+}
+
+/* Style the userprofile HBox */
+#userprofile {
+    -fx-alignment: center-left;
+    -fx-background-color: grey;
+    -fx-background-color: linear-gradient(to right, #000000, #54595e);
+}
+
+/* Style the ScrollPane */
+#scroll {
+    -fx-pref-height: 450;
+}
+
+/* Style the chatmessages VBox inside the ScrollPane */
+#chatmessages {
+    -fx-alignment: center;
+}
+
+/* Style the message_field TextField */
+#message_field {
+    -fx-pref-height: 38;
+    -fx-pref-width: 280;
+    -fx-prompt-text-fill: grey; /* Color of the prompt text */
+}
+
+.sendMessage {
+    -fx-pref-height: 36;
+    -fx-pref-width: 120;
+    -fx-background-color: #4CAF50; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14; /* Font size */
+    -fx-font-weight: bold; /* Bold text */
+    -fx-border-color: #45A049; /* Border color */
+    -fx-border-width: 1; /* Border width */
+    -fx-border-radius: 5; /* Border radius */
+}
+
+/* Hover effect for the sendMessage Button */
+#sendMessage:hover {
+    -fx-background-color: #45A049; /* Darker green background on hover */
+}

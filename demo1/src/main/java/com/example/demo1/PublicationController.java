@@ -3,6 +3,8 @@ package com.example.demo1;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,6 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +72,7 @@ public class PublicationController {
         AnchorPane profile = Test.createUserProfile(user.getFirstName() + " " + user.getLastName(), userImage, 50);
         Test.addEventHandlers(profile, user);
         Label time = new Label(publication.getTimestamp());
-        time.centerShapeProperty();
+        time.setStyle("-fx-text-fill: white;");
         publicationUser.getChildren().addAll(profile, time);
 
         Label descriptionLabel = new Label(publication.getDescription());
@@ -158,44 +162,37 @@ public class PublicationController {
 
             // Create VBox to hold comments
             VBox commentsBox = new VBox();
-            commentsBox.setSpacing(40);
+            commentsBox.setSpacing(10);
+
             // Display comments in the VBox
             for (Comment comment : comments) {
-                HBox commentBox = new HBox();
-                VBox details=new VBox();
-                details.setSpacing(10);
-                // Create user profile for the commenter
-                User commenter = comment.getAuthor();
-                Image commenterImage = Test.returnUserProfileImage(commenter.getProfilePicture());
-                AnchorPane commenterProfile = Test.createUserProfile(commenter.getFirstName() + " " + commenter.getLastName(), commenterImage, 50);
-                //Test.addEventHandlers(commenterProfile, commenter);
-
-                // Create label for the comment text
-                Label commentLabel = new Label(comment.getText() + " - " + comment.getTimestamp());
-                commentLabel.setWrapText(true);
-                commentLabel.setStyle("-fx-text-fill: white;");
-                details.getChildren().addAll(commenterProfile, commentLabel);
-                commentBox.getChildren().add(details);
+                // Create HBox for each comment using the structure from createMessageContainer
+                HBox commentBox = createCommentContainer(comment.getAuthor(),comment.getText(), comment.getTimestamp(), comment.getAuthor().getId()==UserSession.getLog_user().getId());
                 commentsBox.getChildren().add(commentBox);
             }
-            commentsBox.setStyle("-fx-background-color: black;");
+
             // Create TextField and Button for adding new comments
             TextField newCommentField = new TextField();
             Button addCommentButton = new Button("Add Comment");
-            Alert alert = new Alert(Alert.AlertType.NONE);
             addCommentButton.setOnAction(event -> {
-                String comment = newCommentField.getText();
+                String commentText = newCommentField.getText();
                 try {
-                    DatabaseConnector.addComment(associatedPublication.getId(), UserSession.getLog_user().getId(), comment);
+                    DatabaseConnector.addComment(associatedPublication.getId(), UserSession.getLog_user().getId(), commentText);
 
-                    // Schedule the closing of the alert on the JavaFX Application Thread
-                   alert.close();
-                   Test.showAlert("comment added ","the comments you added has been succesfully sent ");
+                    // Update the comments box with the new comment
+                    HBox newCommentBox = createCommentContainer(UserSession.getLog_user(),commentText, Timestamp.valueOf(LocalDateTime.now()), true);
+                    commentsBox.getChildren().add(newCommentBox);
+
+                    // Clear the input field
+                    newCommentField.clear();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             });
-
+            commentsBox.setStyle("-fx-background-color: #a3abb1 ;");
+            commentsBox.setSpacing(20);
+            addCommentButton.setStyle("-fx-background-color: #555555;\n" +
+                    "    -fx-text-fill: white;");
             commentsBox.getChildren().addAll(newCommentField, addCommentButton);
 
             // Wrap the commentsBox in a ScrollPane
@@ -205,7 +202,8 @@ public class PublicationController {
             scrollPane.setFitToWidth(true);
 
             // Create and show an Alert with the ScrollPane as content
-            VBox scroll=new VBox(scrollPane,newCommentField,addCommentButton);
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            VBox scroll = new VBox(scrollPane, newCommentField, addCommentButton);
             alert.setTitle("Comments");
             alert.getDialogPane().setContent(scroll);
 
@@ -218,6 +216,38 @@ public class PublicationController {
         }
     }
 
+    // Helper method to create an HBox for a comment
+    private HBox createCommentContainer(User author, String content, Timestamp timestamp, boolean sentByCurrentUser) {
+        HBox commentBox = new HBox();
+        Label commentLabel = new Label(content);
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM");
+        String formattedDateTime = localDateTime.format(formatter);
+        Label timestampLabel = new Label(formattedDateTime);
+
+        commentLabel.setWrapText(true);
+        commentLabel.setPadding(new Insets(10));
+
+        // Customize the appearance of the comment box and labels based on the sender
+        if (sentByCurrentUser) {
+            commentBox.setAlignment(Pos.CENTER_RIGHT);
+            commentLabel.setTranslateX(-5);
+            commentLabel.setStyle("-fx-background-color: #757575; -fx-background-radius: 15; -fx-padding: 15px; -fx-text-fill: white;");
+        } else {
+            commentBox.setAlignment(Pos.CENTER_LEFT);
+            commentLabel.setTranslateX(5);
+            commentLabel.setStyle("-fx-background-color: #424242; -fx-background-radius: 15; -fx-padding: 15px; -fx-text-fill: white;");
+        }
+
+        Label user = new Label(author.getFirstName() + " " + author.getLastName() + " / \n");
+
+        // Add comment content and timestamp labels to the commentBox
+        VBox commentContent = new VBox(user, commentLabel, timestampLabel);
+        commentContent.setSpacing(0);
+        commentBox.getChildren().add(commentContent);
+
+        return commentBox;
+    }
 
 
 }

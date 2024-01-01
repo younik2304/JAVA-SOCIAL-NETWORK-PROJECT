@@ -1,0 +1,17 @@
+/* styles.css */
+.publication-header {
+    -fx-background-color: linear-gradient(to bottom, #333333, #222222);
+}
+
+.publication-buttons {
+    -fx-spacing: 5;
+}
+
+.publication-buttons .button {
+    -fx-background-color: #555555;
+    -fx-text-fill: white;
+}
+
+.publication-buttons .button:hover {
+    -fx-background-color: #333333;
+}

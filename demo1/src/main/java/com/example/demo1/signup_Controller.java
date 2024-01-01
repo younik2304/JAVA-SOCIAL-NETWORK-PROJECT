@@ -42,6 +42,16 @@ public class signup_Controller {
 
     @FXML
     private Label signUpLabel;
+    @FXML
+    private Button login ;
+    @FXML
+    void handleLoginButtonAction() {
+        try {
+            SceneSwitcher.switchScene("login.fxml",Test.getStage(signUpLabel),"login");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 

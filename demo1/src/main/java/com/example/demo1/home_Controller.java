@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -28,6 +29,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,6 +69,8 @@ public class home_Controller {
     public ImageView friendRequests;
     @FXML
     public ImageView messages;
+    @FXML
+    private Button logoutButton;
     public User currentChatUser;
     public Client activeClient;
     public  ChatController chatController; // Add this field
@@ -94,78 +99,79 @@ public class home_Controller {
         //Test.createUserProfile(profile,userName,userImage,50);
         // Add UserProfile to the top AnchorPane
         Test.addEventHandlers(profile,UserSession.getLog_user());
-        FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource("ajouterpub.fxml"));
         addPub.setOnMouseClicked(event -> {
-            // Create an Alert
-            VBox userinfos=new VBox();
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setTitle("Add Publication");
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Add Publication");
+
+            // Create a new FXMLLoader instance for each dialog
+            FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource("ajouterpub.fxml"));
+
+            // Load the content from ajouterpub.fxml
             try {
-                userinfos = anchorPaneLoader.load();
+                Parent content = anchorPaneLoader.load();
+                dialog.getDialogPane().setContent(content);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            // Set the content of the Alert to manualPublicationAnchorPane
-            alert.getDialogPane().setContent(userinfos);
 
-            // Create a button for the OK action
-            ButtonType okButton = new ButtonType("send publication", ButtonBar.ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(okButton);
+            // Add buttons to the dialog
+            ButtonType okButtonType = new ButtonType("Send Publication", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
 
-            // Get the addPubController
+            // Get the controller
             addPubController controller = anchorPaneLoader.getController();
 
             // Set the action for the OK button
-            Node okButtonNode = alert.getDialogPane().lookupButton(okButton);
+            Node okButtonNode = dialog.getDialogPane().lookupButton(okButtonType);
             okButtonNode.addEventFilter(ActionEvent.ACTION, e -> {
-                // Call the sendPublication method in addPubController
                 try {
+                    // Call the sendPublication method in addPubController
                     controller.sendPublication();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-                // Close the alert window
-                alert.close();
+                // Close the dialog window
+                dialog.setResult(okButtonType);
                 populateFeedWithPublications();
             });
 
-            // Show the Alert
-            alert.showAndWait();
-
-            // Now that the button is clicked, set the stage for addPubController
+            // Set the stage for addPubController
             controller.setHomeController(this);
+
             controller.setStage((Stage) addPub.getScene().getWindow());
+
+            // Show the dialog and wait for user input
+            Optional<ButtonType> result = dialog.showAndWait();
         });
-        FXMLLoader infosLoader = new FXMLLoader(getClass().getResource("UserInfos.fxml"));
-        HBox userinfos;
-        try {
-            userinfos = infosLoader.load();
-            // Get the controller without setting the stage
-            UserInfos controller = infosLoader.getController();
-            controller.initialize();
 
-            userInfos.setOnMouseClicked(e -> {
-                Alert alert = new Alert(Alert.AlertType.NONE);
-                alert.setTitle("User infos");
+        userInfos.setOnMouseClicked(e -> {
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("User Infos");
 
-                // Set the content of the Alert to userinfos
-                alert.getDialogPane().setContent(userinfos);
+            // Create a new FXMLLoader instance for each dialog
+            FXMLLoader infosLoader = new FXMLLoader(getClass().getResource("UserInfos.fxml"));
 
-                // Add a custom button to the alert to handle closing
-                ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(closeButton);
+            try {
+                HBox userinfos = infosLoader.load();
+                // Get the controller without setting the stage
+                UserInfos controller = infosLoader.getController();
+                controller.initialize();
 
-                // Show the Alert
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == closeButton) {
-                        // Handle the close button action if needed
-                    }
-                });
-            });
+                // Set the content of the dialog to userinfos
+                dialog.getDialogPane().setContent(userinfos);
 
-        } catch (IOException e) {
-            System.out.println("Error loading UserInfos.fxml: " + e.getMessage());
-        }
+                // Add a custom button to the dialog to handle closing
+
+                dialog.getDialogPane().getButtonTypes().setAll(ButtonType.CANCEL);
+
+                // Show the dialog and wait for user input
+                Optional<ButtonType> result = dialog.showAndWait();
+
+
+            } catch (IOException ex) {
+                System.out.println("Error loading UserInfos.fxml: " + ex.getMessage());
+            }
+        });
 
 
         // Set up the event handler for the addPub button
@@ -174,21 +180,28 @@ public class home_Controller {
         populateSidebarWithUsers();
         populateFeedWithPublications();
         homeIcon.setOnMouseClicked(event -> {
-            // Handle the home icon click event
+            scroll.setContent(feed);
+            sidebar.getChildren().clear();
             populateFeedWithPublications();
+            try {
+                populateSidebarWithUsers();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         });
 
         // Set the click event for the user icon
         userIcon.setOnMouseClicked(event -> {
             // Handle the user icon click event
+            scroll.setContent(feed);
             populateCenterWithUserPublications(UserSession.getLog_user());
         });
         friendRequests.setOnMouseClicked(event->{
             searchUsers(DatabaseConnector.getFriendRequests());
         });
-        Button logout=new Button("log out ");
-        footer.getChildren().add(logout);
-        logout.setOnAction(e->{
+
+        logoutButton.setOnAction(e->{
             UserSession.logout(this);
         });
 
@@ -206,7 +219,7 @@ public class home_Controller {
     public void searchUsers(List<FriendRequests> fr_reqs) {
         feed.getChildren().clear();
         feed.setPrefHeight(652.0);
-        AnchorPane search = new AnchorPane();
+        HBox search = new HBox();
 
         // Create TextField dynamically
         TextField searchField = new TextField();
@@ -218,10 +231,12 @@ public class home_Controller {
         Button searchButton = new Button("Search");
         searchButton.setLayoutX(200.0);
         searchButton.setLayoutY(10.0);
+        search.setSpacing(20);
         search.getChildren().addAll(searchField, searchButton);
         feed.getChildren().addAll(search);
         for (FriendRequests request : fr_reqs) {
             HBox userBox = new HBox();
+            userBox.setSpacing(20);
             Button acceptButton = new Button("Accept");
             Button rejectButton = new Button("Reject");
             User sender = DatabaseConnector.getUserById(request.getSenderId());
@@ -266,9 +281,6 @@ public class home_Controller {
                     Test.showAlert("no user", "there are no users with the name :" + searchField.getText());
                 } else {
                     List<User> friends = DatabaseConnector.getFriends();
-                    for (User friend : friends){
-                        System.out.println("friend"+ friend.getLastName());
-                    }
                     displayFriendRequests(user, fr_reqs, friends);
                 }
             }
@@ -280,6 +292,7 @@ public class home_Controller {
         feed.getChildren().clear();
         feed.setPrefHeight(652.0);
         HBox userBox=new HBox();
+        userBox.setSpacing(20);
         if (reqs.stream().anyMatch(request ->  request.getReceiverId() == user.getId())){
 
             Button acceptButton = new Button("Accept");
@@ -340,6 +353,7 @@ public class home_Controller {
         feed.getChildren().add(userBox);
     }
     private void populateSidebarWithUsers() throws SQLException {
+        sidebar.getChildren().clear();
         // Fetch the list of users from the database
         List<User> userList = DatabaseConnector.getUsers();
 
@@ -409,7 +423,6 @@ public class home_Controller {
         // Clear existing content in the feed
         feed.getChildren().clear();
         feed.setPrefHeight(652.0);
-
         // Populate the VBox with publication containers
         for (Publication publication : publicationList) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("publication.fxml"));
@@ -497,7 +510,9 @@ public class home_Controller {
             chatController = loader.getController();  // Access the controller after loading
 
             chatContent=chatController.setChat(user, this);
-            border.setCenter(chatContent);
+            feed.getChildren().clear();
+            chatContent.setAlignment(Pos.CENTER);
+            scroll.setContent(chatContent);
 
 
         } catch (Exception e) {

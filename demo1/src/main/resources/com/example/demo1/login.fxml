@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -7,43 +9,52 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Login_Controller">
-    <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="white-form">
-            <children>
-                <Label layoutX="68.0" layoutY="110.0" text="Sign In your Account">
-                    <font>
-                        <Font name="Tahoma" size="20.0" />
-                    </font>
-                </Label>
-                <Label layoutX="124.0" layoutY="135.0" text="Admin Portal">
-                    <font>
-                        <Font name="Tahoma" size="13.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="emailField" layoutX="36.0" layoutY="193.0" prefHeight="30.0" prefWidth="250.0" promptText="email" styleClass="textfield" />
-                <PasswordField fx:id="passwordField" layoutX="36.0" layoutY="233.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" styleClass="textfield" />
-                <Button fx:id="loginButton" layoutX="35.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="41.0" prefWidth="250.0" styleClass="btn" text="Login">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-                <Button fx:id="signupButton" layoutX="90.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleSignupButtonAction" prefHeight="30.0" prefWidth="140.0" styleClass="btn" text="Signup">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-                <Label fx:id="createAccountLabel" alignment="CENTER" layoutX="109.0" layoutY="357.0" text="Create an account ?" textAlignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#174a79" height="544.0" layoutX="324.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="376.0" />
-            <ImageView fitHeight="271.0" fitWidth="250.0" layoutX="387.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/letter-a-xxl.png" />
-               </image>
-            </ImageView>
-            </children>
-        </AnchorPane>
-    </children>
-    <stylesheets>
-        <URL value="@../../../STYLE/login_style.css" />
-    </stylesheets>
-</StackPane>
+<HBox alignment="CENTER" prefHeight="669.0" prefWidth="956.0" spacing="100.0" stylesheets="@../../../STYLE/login_style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Login_Controller">
+   <children>
+      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="365.0" spacing="30.0">
+         <children>
+            <Label text="Sign In your Account" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailField" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="322.0" promptText="email" styleClass="textfield">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="250.0" promptText="Password" styleClass="textfield">
+               <font>
+                  <Font size="17.0" />
+               </font></PasswordField>
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="41.0" prefWidth="250.0" styleClass="btn" text="Login">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="signupButton" mnemonicParsing="false" onAction="#handleSignupButtonAction" prefHeight="30.0" prefWidth="140.0" styleClass="btn" text="Signup">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label fx:id="createAccountLabel" alignment="CENTER" text="Create an account ?" textAlignment="CENTER" textFill="WHITE" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin>
+      </VBox>
+      <ImageView fitHeight="271.0" fitWidth="335.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../IMAGES/letter-a-xxl.png" />
+         </image>
+         <HBox.margin>
+            <Insets right="30.0" />
+         </HBox.margin>
+      </ImageView>
+   </children>
+    <style>
+        -fx-background-color: linear-gradient(to bottom, #191976, #5150f2);
+    </style>
+</HBox>

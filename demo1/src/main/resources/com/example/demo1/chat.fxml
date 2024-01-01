@@ -5,17 +5,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="chat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ChatController">
+<VBox fx:id="chat" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="599.0" spacing="10.0" stylesheets="@../../../STYLE/chatcss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ChatController">
    <children>
-      <HBox fx:id="userprofile" alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="512.0" style="-fx-background-color: grey;" />
-      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" prefHeight="450.0">
+      <HBox fx:id="userprofile" alignment="CENTER_LEFT" prefHeight="121.0" prefWidth="599.0" styleClass="userprofile" />
+      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" prefHeight="364.0" prefWidth="599.0" styleClass="scroll">
          <content>
-            <VBox fx:id="chatmessages" alignment="CENTER" prefWidth="600.0" />
+            <VBox fx:id="chatmessages" alignment="CENTER" prefWidth="600.0" styleClass="chatmessages" />
          </content>
       </ScrollPane>
-      <HBox alignment="CENTER" prefHeight="54.0" prefWidth="603.0" spacing="30.0" style="-fx-background-color: grey;">
+      <HBox alignment="CENTER" prefHeight="137.0" prefWidth="599.0" spacing="30.0" style="-fx-background-color: grey;">
          <children>
-            <TextField fx:id="message_field" prefHeight="38.0" prefWidth="280.0" promptText="type message ">
+            <TextField fx:id="message_field" prefHeight="38.0" prefWidth="280.0" promptText="type message " styleClass="message_field">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -23,7 +23,7 @@
                   <Insets />
                </HBox.margin>
             </TextField>
-            <Button fx:id="sendMessage" mnemonicParsing="false" prefHeight="36.0" prefWidth="102.0" text="sendMessage" />
+            <Button fx:id="sendMessage" mnemonicParsing="false" prefHeight="36.0" prefWidth="102.0" styleClass="sendMessage" text="sendMessage" />
          </children>
       </HBox>
    </children>

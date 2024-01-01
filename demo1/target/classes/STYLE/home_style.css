@@ -1,7 +1,101 @@
-#top,#footer{
-    -fx-background-color :#373130;
+/* Apply styles to the entire BorderPane */
+
+/* Style the navbar HBox in the top region */
+#navbar {
+    -fx-alignment: center-left;
+    -fx-background-color: #373130;
 }
 
-#homefeed{
-    -fx-background-color: black ;
+/* Style the icons in the navbar */
+#homeIcon, #userIcon, #friendRequests, #messages {
+    -fx-fit-height: 70;
+    -fx-fit-width: 70;
+    -fx-pick-on-bounds: true;
+    -fx-preserve-ratio: true;
+    -fx-margin-left: 30;
+    -fx-margin-right: 20;
+}
+
+/* Style the center VBox */
+#center {
+    -fx-spacing: 10;
+}
+
+/* Style the buttons in the center HBox */
+/* Style the buttons */
+.button {
+    -fx-font-size: 14;
+    -fx-pref-height: 35;
+    -fx-pref-width: 150;
+    -fx-margin-right: 40;
+    -fx-margin-top: 10;
+}
+
+/* Style the Add Publication button */
+#addPub {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+}
+
+/* Style the User Infos button */
+#userInfos {
+    -fx-background-color: #008CBA; /* Blue */
+    -fx-text-fill: white;
+}
+
+/* Hover effect for all buttons */
+.button:hover {
+    -fx-background-color: #45a049; /* Darker Green */
+}
+
+/* Pressed effect for all buttons */
+.button:pressed {
+    -fx-background-color: #45a049; /* Darker Green */
+}
+
+
+/* Style the ScrollPane */
+#scroll {
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+    -fx-hbar-policy: never;
+}
+
+/* Style the feed VBox inside the ScrollPane */
+#feed {
+
+    -fx-spacing: 30;
+    -fx-background-color: grey;
+}
+
+/* Style the sidebar VBox in the right region */
+#sidebar {
+    -fx-pref-height: 602;
+    -fx-pref-width: 147;
+    -fx-background-color: grey;
+}
+
+/* Style the footer */
+.footer {
+    -fx-background-color: #373130;
+}
+
+/* Style the logout button */
+#logoutButton {
+    -fx-background-color: #d9534f; /* Red */
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-pref-height: 35;
+    -fx-pref-width: 100;
+    -fx-margin-left: 10;
+}
+
+/* Hover effect for the logout button */
+#logoutButton:hover {
+    -fx-background-color: #c9302c; /* Darker Red */
+}
+
+/* Pressed effect for the logout button */
+#logoutButton:pressed {
+    -fx-background-color: #c9302c; /* Darker Red */
 }

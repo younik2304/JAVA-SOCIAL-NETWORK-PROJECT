@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseConnector {
-    private final String JDBC_URL = "jdbc:mysql://viaduct.proxy.rlwy.net:33591/railway";
+    private final String JDBC_URL = "jdbc:mysql://roundhouse.proxy.rlwy.net:51322/railway";
     private final String JDBC_USER = "root";
-    private final String JDBC_PASSWORD = "66-5ceh214d5-aA6D6EabAAg5ggHHAhh";
+    private final String JDBC_PASSWORD = "Cbc1f1hH22Ad3EHC5F--65H3b6gBBBDc";
 
     private static Connection connection;
 

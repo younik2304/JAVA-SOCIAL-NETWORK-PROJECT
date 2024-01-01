@@ -3,6 +3,7 @@ package com.example.demo1;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,7 +15,6 @@ public class SceneSwitcher {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(SceneSwitcher.class.getResource(fxmlPath));
             Parent root = loader.load();
-
             // Create a new scene with the loaded FXML
             Scene scene = new Scene(root);
 

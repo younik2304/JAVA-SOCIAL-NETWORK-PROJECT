@@ -2,8 +2,6 @@ package com.example.demo1;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +9,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class addPubController {
@@ -53,7 +50,7 @@ public class addPubController {
             pub_image.setImage(image);
             addPubController.imagepath = imagePath;
         }
-        else imagepath="IMAGES/letter-a-xxl.png";
+        else imagepath= "IMAGES/letter-a-xxl.png";
     }
 
     public static String getImagepath() {
@@ -86,18 +83,19 @@ public class addPubController {
 
         if (publicationAdded != -1) {
             CloudinaryImageUtility.uploadPublicationImage(addPubController.imagepath, String.valueOf(publicationAdded));
-           Test.showAlert("Publication sent successfully.","publication " +publicationAdded +" is added ");
-            // Optionally, clear the description TextField and reset the image
-            description.clear();
-            pub_image.setImage(null);
-            addPubController.imagepath = "";
-            if (homeController != null) {
-                homeController.refreshFeed();
-            }
 
-        } else {
-            Test.showAlert("Failed to send publication.", "no return id ");
-            // Handle the case where the publication couldn't be added to the database
+            Test.showAlert("Publication sent successfully.","publication " +publicationAdded +" is added ");
+                // Optionally, clear the description TextField and reset the image
+                description.clear();
+                pub_image.setImage(null);
+                addPubController.imagepath = "";
+                if (homeController != null) {
+                    homeController.refreshFeed();
+                }
+
+            } else {
+                Test.showAlert("Failed to send publication.", "no return id ");
+                // Handle the case where the publication couldn't be added to the database
+            }
         }
     }
-}

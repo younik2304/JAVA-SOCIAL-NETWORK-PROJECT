@@ -9,11 +9,11 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 
-<BorderPane fx:id="border" maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
+<BorderPane fx:id="border" maxHeight="825.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1044.0" stylesheets="@../../../STYLE/home_style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.home_Controller">
    <top>
-            <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="994.0" style="-fx-background-color: #373130;">
+            <HBox fx:id="navbar" alignment="CENTER_LEFT" layoutX="-2.0" prefHeight="70.0" prefWidth="994.0" styleClass="navbar">
                <children>
-                  <ImageView fx:id="homeIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="homeIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="homeIcon">
                      <image>
                         <Image url="@../../../IMAGES/homefeed.png" />
                      </image>
@@ -21,7 +21,7 @@
                         <Insets left="30.0" right="20.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="userIcon" fitHeight="70.0" fitWidth="70.0" layoutX="330.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userIcon" fitHeight="70.0" fitWidth="70.0" layoutX="330.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" styleClass="userIcon">
                      <image>
                         <Image url="@../../../IMAGES/user-xxl.png" />
                      </image>
@@ -29,20 +29,7 @@
                         <Insets left="30.0" right="20.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="365.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../IMAGES/search.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="30.0" right="20.0" />
-                     </HBox.margin>
-                  </ImageView>
-            <ImageView fx:id="friendRequests" fitHeight="73.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../IMAGES/add-user-xxl.png" />
-               </image>
-            </ImageView>
-                  <ImageView fx:id="messages" fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="messages" fitHeight="70.0" fitWidth="70.0" layoutX="260.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" styleClass="messages">
                      <image>
                         <Image url="@../../../IMAGES/chat.png" />
                      </image>
@@ -50,22 +37,27 @@
                         <Insets left="30.0" right="50.0" />
                      </HBox.margin>
                   </ImageView>
+            <ImageView fx:id="friendRequests" fitHeight="73.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" styleClass="friendRequests">
+               <image>
+                  <Image url="@../../../IMAGES/add-user-xxl.png" />
+               </image>
+            </ImageView>
                </children>
             </HBox>
 
 
    </top>
    <center>
-   <VBox fx:id="center" spacing="10">
+   <VBox fx:id="center" spacing="10" styleClass="center">
       <children>
             <HBox alignment="BASELINE_CENTER" prefHeight="35.0" prefWidth="731.0">
                <children>
-                  <Button fx:id="addPub" mnemonicParsing="false" text="Add Publication">
+                  <Button fx:id="addPub" mnemonicParsing="false" styleClass="addPub" text="Add Publication">
                      <HBox.margin>
                         <Insets right="40.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="userInfos" mnemonicParsing="false" text="show user infos ">
+                  <Button fx:id="userInfos" mnemonicParsing="false" styleClass="userInfos" text="show user infos ">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
@@ -75,26 +67,34 @@
          <!-- New AnchorPane for Manual Publication Entry -->
 
          <!-- Existing ScrollPane for Publications -->
-         <ScrollPane fx:id="scroll" fitToHeight="false" fitToWidth="false" hbarPolicy="NEVER" maxHeight="632.0" maxWidth="731.0" prefHeight="632.0" prefWidth="731.0">
+         <ScrollPane fx:id="scroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="632.0" maxWidth="904.0" prefHeight="499.0" prefWidth="904.0" styleClass="scroll">
             <content>
                <!-- Existing VBox for Publications -->
-               <VBox fx:id="feed" maxWidth="800.0" prefHeight="503.0" prefWidth="835.0" spacing="30" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+               <VBox fx:id="feed" alignment="CENTER" maxWidth="899.0" prefHeight="499.0" prefWidth="858.0" spacing="30" style="-fx-background-color: grey;" styleClass="feed" BorderPane.alignment="CENTER">
                      <padding>
                         <Insets left="100.0" />
                      </padding>
                   </VBox>
             </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
          </ScrollPane>
       </children>
    </VBox>
 </center>
-   <stylesheets>
-      <URL value="@../../../STYLE/login_style.css" />
-   </stylesheets>
    <right>
-      <VBox fx:id="sidebar" prefHeight="602.0" prefWidth="147.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
+      <VBox fx:id="sidebar" prefHeight="602.0" prefWidth="147.0" style="-fx-background-color: grey;" styleClass="sidebar" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <HBox fx:id="footer" prefHeight="46.0" prefWidth="988.0" style="-fx-background-color: #373130;" BorderPane.alignment="CENTER" />
+      <HBox fx:id="footer" prefHeight="54.0" prefWidth="1044.0" style="-fx-background-color: #373130;" styleClass="footer" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="logoutButton" mnemonicParsing="false" styleClass="logout-button" text="Logout">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+
+         </children></HBox>
    </bottom>
 </BorderPane>

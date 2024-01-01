@@ -1,3 +1,8 @@
+/* Add the following styles to customize your VBox background and spacing */
+VBox {
+    -fx-background-color: linear-gradient(to bottom, #191976, #5150f2);
+    -fx-spacing: 30;
+}
 
 .white-form {
     -fx-background-color: #ffffff;
@@ -18,14 +23,13 @@
 }
 
 .label {
-
     -fx-color: white;
     -fx-font-size: 14;
 }
 
 .btn {
     -fx-background-color: #98583a3a;
-    -fx-text-fill: black;
+    -fx-text-fill: white ;
     -fx-font-size: 16;
     -fx-padding: 10 20;
     -fx-border-color: #5074bc;

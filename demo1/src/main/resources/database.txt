@@ -7,7 +7,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     gender VARCHAR(10) not null ,
-    profilepicture varchar(255),
+    profilepicture varchar(255)
 );
 CREATE TABLE publications (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,12 +17,7 @@ CREATE TABLE publications (
     timestamp TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
-CREATE TABLE friendships (
-    friendship_id INT PRIMARY KEY,
-    user1_id INT,
-    user2_id INT,
-    status VARCHAR(50) -- 'PENDING', 'ACCEPTED', 'REJECTED', etc.
-);
+
 CREATE TABLE comments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     publication_id INT,
@@ -31,4 +26,27 @@ CREATE TABLE comments (
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (publication_id) REFERENCES publications(id),
     FOREIGN KEY (commenter_id) REFERENCES users(id)
+);
+CREATE TABLE Friends (
+    user_id INT,
+    friend_id INT,
+    PRIMARY KEY (user_id, friend_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (friend_id) REFERENCES users(id)
+);
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT,
+    recipient_id INT,
+    message_text TEXT,
+    timestamp TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (recipient_id) REFERENCES users(id)
+);
+CREATE TABLE FriendRequests (
+    request_id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT,
+    receiver_id INT,
+    FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (receiver_id) REFERENCES users(id)
 );

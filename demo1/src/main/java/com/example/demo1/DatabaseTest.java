@@ -14,7 +14,7 @@ public class DatabaseTest {
         try (Connection connection = databaseConnector.getConnection()) {
             if (connection != null) {
                 // Delete all rows from the 'publications' table.
-                String deleteQuery = "delete from messages;";
+                String deleteQuery = "desc users;";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
                     // Execute the delete statement
