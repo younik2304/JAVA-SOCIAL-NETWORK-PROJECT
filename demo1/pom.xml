@@ -15,11 +15,6 @@
 
   <dependencies>
       <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-          <version>2.0.9</version>
-      </dependency>
-      <dependency>
           <groupId>com.cloudinary</groupId>
           <artifactId>cloudinary-http44</artifactId>
           <version>1.34.0</version>
@@ -63,17 +58,36 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.jetbrains</groupId>
-          <artifactId>annotations</artifactId>
-          <version>RELEASE</version>
-          <scope>compile</scope>
-      </dependency>
+          <dependency>
+              <groupId>org.jetbrains</groupId>
+              <artifactId>annotations</artifactId>
+              <version>24.0.0</version>
+          </dependency>
   </dependencies>
 
   <build>
+
     <plugins>
-      <plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.2.4</version>
+                    <configuration>
+                        <createDependencyReducedPom>false</createDependencyReducedPom>
+                        <shadedArtifactAttached>true</shadedArtifactAttached>
+                        <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+        <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
@@ -91,7 +105,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.example.demo1/com.example.demo1.Main</mainClass>
+              <mainClass>com.example.demo1/com.example.demo1.executableMain</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

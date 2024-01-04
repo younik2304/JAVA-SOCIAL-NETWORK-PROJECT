@@ -112,11 +112,6 @@ public class signup_Controller {
                 // Handle the case where user ID is not valid
                 System.out.println("Failed to get valid user ID");
             }
-
-
-
-            // Use the getStage method to get the current stage
-
         }
     }
 

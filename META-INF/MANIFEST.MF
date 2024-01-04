@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: demo1/src/main/java/com.example.demo1.executableMain
+Class-Path: com/example/demo1/executableMain.java
+

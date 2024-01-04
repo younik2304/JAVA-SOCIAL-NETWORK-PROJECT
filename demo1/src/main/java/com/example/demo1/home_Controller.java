@@ -31,8 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class home_Controller {
     @FXML
@@ -82,7 +80,7 @@ public class home_Controller {
     public VBox getSidebar() {
         return sidebar;
     }
-    private static final Logger logger = LoggerFactory.getLogger(home_Controller.class);
+
 
     // Create a ChatClient for the logged-in user
     public Button getAddPub() {
@@ -495,11 +493,11 @@ public class home_Controller {
             clientThread.start();
             activeClient = client;
             System.out.println("active client is "+UserId);
-            logger.debug("connected to server successfully ");
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error connecting to server: " + e.getMessage());
-            logger.error("eroor");
+
         }
     }
 

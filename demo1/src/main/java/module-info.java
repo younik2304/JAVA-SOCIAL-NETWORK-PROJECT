@@ -8,6 +8,5 @@ module com.example.demo {
     opens com.example.demo1 to javafx.fxml;
     exports com.example.demo1;
     requires cloudinary.core;
-    requires org.slf4j;
 
 }

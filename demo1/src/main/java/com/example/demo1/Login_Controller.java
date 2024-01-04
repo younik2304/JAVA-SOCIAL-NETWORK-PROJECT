@@ -41,7 +41,7 @@ public class Login_Controller {
         if(email.isEmpty() || password.isEmpty() ){
             Test.showAlert("fields empty","you have to fill all the fields ");
         }else {
-           ;
+            //check if the account exists with the correct credentiels
             if (login(email, password)) {
                 try {
 
@@ -50,8 +50,6 @@ public class Login_Controller {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-                // User is authenticated, navigate to the main application or dashboard.
-                // Replace the following line with your navigation logic.
                 Test.showAlert("Login Successful", "You are now logged in.");
             } else {
                 Test.showAlert("Login Failed", "User not found or invalid credentials.");
