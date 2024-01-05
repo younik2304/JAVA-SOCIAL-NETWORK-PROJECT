@@ -11,9 +11,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<VBox stylesheets="@../../../STYLE/ajoutPub.css" alignment="CENTER" prefHeight="528.0" prefWidth="744.0" styleClass="vbox-background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.addPubController">
+<VBox alignment="CENTER" prefHeight="528.0" prefWidth="744.0" styleClass="vbox-background" stylesheets="@../../../STYLE/ajoutPub.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.addPubController">
    <children>
-      <TextField fx:id="description" prefHeight="72.0" prefWidth="679.0" promptText="Type a description for your publication " styleClass="description-textfield">
+      <TextField fx:id="description" alignment="CENTER" prefHeight="53.0" prefWidth="677.0" promptText="Type a description for your publication " styleClass="description-textfield">
          <font>
             <Font size="24.0" />
          </font>

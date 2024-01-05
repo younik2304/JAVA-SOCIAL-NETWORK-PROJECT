@@ -70,7 +70,7 @@
          <ScrollPane fx:id="scroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="632.0" maxWidth="904.0" prefHeight="499.0" prefWidth="904.0" styleClass="scroll">
             <content>
                <!-- Existing VBox for Publications -->
-               <VBox fx:id="feed" alignment="CENTER" maxWidth="899.0" prefHeight="499.0" prefWidth="858.0" spacing="30" style="-fx-background-color: grey;" styleClass="feed" BorderPane.alignment="CENTER">
+               <VBox fx:id="feed" alignment="TOP_CENTER" maxWidth="899.0" prefHeight="499.0" prefWidth="858.0" spacing="30" style="-fx-background-color: grey;" styleClass="feed" BorderPane.alignment="CENTER">
                      <padding>
                         <Insets left="100.0" />
                      </padding>
